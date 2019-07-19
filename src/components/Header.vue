@@ -40,10 +40,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 #header{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1%;
+    // margin-bottom: 1%;
     color: white;
 
     .logo{

@@ -1,6 +1,6 @@
 <template>
 
-    <div class='HomeMenu' @keydown='nextItem'>
+    <div v-if='showDiv === 0' class='HomeMenu' @keydown='nextItem'>
         <ul v-for='item in items' :key='item.id' :class='{"active-item": currentItem === item.id}'>
             {{item.text}}
         </ul>
@@ -9,12 +9,12 @@
 </template>
 
 <script>
-// Vue.use(require('vue-shortkey'))
-
 export default {
   name: 'HomeMenu',
   data() {
     return {
+      // showMenu: true,
+      showDiv: 0,
       currentItem: 1,
       items: [
         { id: 1, text: 'Home' },
@@ -38,13 +38,23 @@ export default {
         console.log('upping');
         if (this.currentItem === 0) {
           this.currentItem = 8;
-          console.log('reached ed');
+          console.log('reached end');
         }
       } else if (event.keyCode === 40) {
         this.currentItem++;
         console.log('downing');
         if (this.currentItem === 9) {
           this.currentItem = 1;
+        }
+      } else if (event.keyCode === 39) {
+        console.log('right');
+        if (this.showDiv < 4) {
+          this.showDiv++;
+        }
+      } else if (event.keyCode === 37) {
+        console.log('left');
+        if (this.showDiv > 0) {
+          this.showDiv--;
         }
       }
     },
@@ -55,10 +65,12 @@ export default {
 <style scoped>
 .HomeMenu{
     width: 400px;
-    
+    color: white;
 }
+
 .active-item {
   background-color: #FEFEFE;
+  color: black;
 }
 
 </style>

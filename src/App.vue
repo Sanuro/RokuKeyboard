@@ -1,23 +1,20 @@
-npm<template>
+<template>
   <div id="app">
 
     <Header id='header'>header</Header>
     <HomeMenu id='homeMenu'>homeMenu</HomeMenu>
-
     <div id='appMenuBox'>
       <AppMenu id='appMenu'>appMenu</AppMenu>
     </div>
+    <Ad id='ad'>ad</Ad>
 
   </div>
 </template>
-v-bind:class='{active:isActive}'
 <script>
-// Vue.use(require('vue-shortkey'))
-
-// import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header';
 import HomeMenu from './components/HomeMenu';
 import AppMenu from './components/AppMenu';
+import Ad from './components/Ad';
 
 export default {
   name: 'app',
@@ -25,6 +22,7 @@ export default {
     Header,
     HomeMenu,
     AppMenu,
+    Ad,
   },
   mounted() {
     window.addEventListener('keydown', this.onKeyDown);
@@ -62,20 +60,20 @@ body{
   background-image: url('../static/image/Newman_TRC_Background.jpg');
 }
 #homeMenu{
-  /* display:inline-block; */
   float: left;
-  /* display: inline-block; */
+  /* position: absolute; */
+  /* display: none; */
 }
 #appMenuBox{
   display: inline-block;
   /* float: right; */
   width: 880px;
 }
-#appMenu{
+#ad{
   /* display: inline-block; */
-
-  -webkit-column-count: 3;
-  -moz-column-count: 3;
+  float: right;
+}
+#appMenu{
   column-count: 3;
 }
 #app {
@@ -84,6 +82,5 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 60px; */
 }
 </style>
