@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-       This is Boilerplate
+       <!-- This is Boilerplate -->
     </div>
 </template>
 <script>

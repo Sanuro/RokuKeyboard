@@ -1,12 +1,17 @@
 <template>
   <div id="app">
+      
+  <Header id='header'>header</Header>
 
-    <Header id='header'>header</Header>
-    <HomeMenu id='homeMenu'>homeMenu</HomeMenu>
-    <div id='appMenuBox'>
-      <AppMenu id='appMenu'>appMenu</AppMenu>
-    </div>
-    <Ad id='ad'>ad</Ad>
+      <div id='main_app'>
+
+        <HomeMenu id='homeMenu'>homeMenu</HomeMenu>
+        <div id='appMenuBox'>
+          <AppMenu id='appMenu'>appMenu</AppMenu>
+        </div>
+
+      <Ad id='ad'>ad</Ad>
+      </div>
 
   </div>
 </template>
@@ -57,24 +62,39 @@ export default {
 
 <style>
 body{
+  /* height: 100%; */
   background-image: url('../static/image/Newman_TRC_Background.jpg');
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: auto;
+  overflow: hidden;
+  /* height: 95vh; */
 }
+
+#app{
+  /* padding: -20vh; */
+
+  height: 100vh;
+}
+#main_app{
+  display: flex;
+  justify-content: stretch;
+  /* justify-content: center; */
+}
+
 #homeMenu{
-  float: left;
-  /* position: absolute; */
-  /* display: none; */
 }
 #appMenuBox{
-  display: inline-block;
-  /* float: right; */
-  width: 880px;
+  height: 60vh;
+  justify-content: center;
+  /* width: 65vw; */
+  /* display: inline-block; */
 }
 #ad{
-  /* display: inline-block; */
-  float: right;
+  /* position: relative; */
 }
 #appMenu{
-  column-count: 3;
+  /* display: flex; */
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -82,5 +102,6 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  /* font-size: 150%; */
 }
 </style>

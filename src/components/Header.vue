@@ -2,7 +2,7 @@
 
   <div id='header'>
       <div class = 'left'>
-        <img class="logo" alt='roku image' src="../../static/image/roku.png">
+        <img class="logo" alt='roku image' src="../../static/image/large_roku.png">
       </div>
 
       <div class ='right'>
@@ -44,11 +44,17 @@ export default {
 #header{
     display: flex;
     justify-content: space-between;
-    // margin-bottom: 1%;
-    color: white;
+    margin: 1% 1% 1% 1%;
+
+    color: #eee9e9;
 
     .logo{
-        width: 20vw;
+      width: 15vw;
+      // margin: 1% 0% 1% 1%;
+    }
+
+    .right{
+      font-size: 3vw;
     }
 }
 

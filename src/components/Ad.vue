@@ -41,9 +41,17 @@ export default {
 </script>
 
 <style>
+
+#Ad{
+  /* display: flex; */
+  margin: 5px;
+}
+
 img{
+  justify-content: flex-end;
+  width: 25vw;
     /* position: relative; */
-    float: right;
+    /* float: right; */
     /* display: inline-block; */
 }
 </style>

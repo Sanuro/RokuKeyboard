@@ -81,13 +81,21 @@ img{
   margin: 5px;
 }
 .AppMenu{
-  justify-content: space-around;
+  display: flex;
+  width: 65vw;
+  /* justify-content: center; */
+}
+
+#apps{
+  width: 95%;
+  /* justify-content: center; */
 }
 .active-image {
-  /* background-color: #FEFEFE; */
-  outline: 4px solid white;
-  /* margin: -10px; */
-  /* margin: 10px; */
+  outline: 4px solid #eee9e9;
+  /* transition: translate; */
+  /* transform: translate(20px, 20px); */
+  /* transform: scale(2); */
+  transition: 0.5s;
 }
 
 

@@ -63,14 +63,22 @@ export default {
 </script>
 
 <style scoped>
+
+
 .HomeMenu{
-    width: 400px;
-    color: white;
+    width: 30vw;
+    color: #eee9e9;
+    font-size: 2vw;
+    margin: 5px;
 }
 
 .active-item {
-  background-color: #FEFEFE;
+  background-color: #eee9e9;
   color: black;
+  transition: 0.5s;
+  /* transition: transform 0.5s; */
+
 }
+
 
 </style>
