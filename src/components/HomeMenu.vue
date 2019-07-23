@@ -1,6 +1,6 @@
 <template>
 
-    <div v-if='showDiv === 0' class='HomeMenu' @keydown='nextItem'>
+    <div v-if='showHomeMenu === 0' class='HomeMenu' @keydown='nextItem'>
         <ul v-for='item in items' :key='item.id' :class='{"active-item": currentItem === item.id}'>
             {{item.text}}
         </ul>
@@ -13,8 +13,7 @@ export default {
   name: 'HomeMenu',
   data() {
     return {
-      // showMenu: true,
-      showDiv: 0,
+      showHomeMenu: 0,
       currentItem: 1,
       items: [
         { id: 1, text: 'Home' },
@@ -48,13 +47,13 @@ export default {
         }
       } else if (event.keyCode === 39) {
         console.log('right');
-        if (this.showDiv < 3) {
-          this.showDiv++;
+        if (this.showHomeMenu < 3) {
+          this.showHomeMenu++;
         }
       } else if (event.keyCode === 37) {
         console.log('left');
-        if (this.showDiv > 0) {
-          this.showDiv--;
+        if (this.showHomeMenu > 0) {
+          this.showHomeMenu--;
         }
       }
     },
@@ -64,22 +63,28 @@ export default {
 
 <style scoped>
 
-
 .HomeMenu{
-    width: 30vw;
+    width: 25vw;
     color: #eee9e9;
     font-size: 2vw;
     margin: 5px;
+    text-align: left;
+    margin-left: 3vw;
+    justify-content: space-around;
+    /* font-size: 2vw; */
+}
+ul{
+  border-left: 2vw solid transparent;
 }
 
 .active-item {
+  align-content: space-between;
+  border-left: 2vw solid #eee9e9;
   background-color: #eee9e9;
   color: black;
-  border-radius: 10px;
-  transition-timing-function: ease-in;
-  transition: 0.5s;
-  /* transform: scale(1.05); */
-  /* transition: transform 0.5s; */
+  /* border-radius: 10px; */
+  /* justify-content: start; */
+  /* margin: 3%; */
 }
 
 

@@ -1,7 +1,7 @@
 <template>
 
-    <div class='AppMenu' @keydown='nextImage'>
-      <div v-for='row in images'>
+    <div class='AppMenuContainer' @keydown='nextImage'>
+      <div id='appMenu' v-for='row in images'>
         <img id='apps' v-for="col in row" v-bind:src="col.url" :key="col.id" :class='{"active-image": currentImage === col.id && showPictures}' :alt="col.alt" />
       </div>
 
@@ -52,6 +52,7 @@ export default {
           this.row++;
           this.currentImage = this.images[this.row][this.column].id;
           console.log(this.row, this.column);
+          // document.getElementById('apps').classList.add('image-slide');
         }
       } else if (event.keyCode === 37) {
         console.log('left');
@@ -73,8 +74,9 @@ export default {
         console.log('up');
         // this.column--;
         for (i = 0; i < this.images.length; i++) {
-          this.images[i].push(this.images[i].shift());
+          this.images[i].unshift(this.images[i].pop());
         }
+        document.getElementById('appMenu').classList.add('smooth');
         this.currentImage = this.images[this.row][0].id;
       }
     },
@@ -82,25 +84,23 @@ export default {
 };
 </script>
 
-<style>
-img{
+<style scoped lang="scss">
+#apps{
   margin: 5px;
 }
-.AppMenu{
+.AppMenuContainer{
   display: flex;
   width: 65vw;
+  // margin-left: 5vw;
 }
 
 #apps{
   width: 95%;
+  margin-left: 5vw;
 }
 .active-image {
   outline: 0.5vw solid #eee9e9;
-  /* transition: translate; */
-  /* transform: translate(20px, 20px); */
-  /* transform: scale(2); */
-  transition: 0.5s;
+  // transition: 0.5s;
 }
-
 
 </style>

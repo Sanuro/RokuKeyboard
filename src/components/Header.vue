@@ -1,12 +1,13 @@
 <template>
 
   <div id='header'>
-      <div class = 'left'>
-        <img class="logo" alt='roku image' src="../../static/image/large_roku.png">
+
+      <div id='left'>
+        <img id='logo' class="logo" alt='roku image' src="../../static/image/large_roku.png">
       </div>
 
-      <div class ='right'>
-        <p class = 'time'>{{ time }}</p>
+      <div id='right'>
+        <p id='time' class = 'time'>{{ time }}</p>
       </div>
 
   </div>
@@ -42,19 +43,30 @@ export default {
 <style scoped lang="scss">
 
 #header{
-    display: flex;
-    justify-content: space-between;
-    margin: 1% 1% 1% 1%;
+  display: flex;
+  justify-content: space-between;
+  color: #eee9e9;   
+  margin: 5% 3% 5% 0%;
+}
 
-    color: #eee9e9;
+#left{
+  align-self: center;
+  margin-left: 5vw;
+}
 
-    .logo{
-      width: 15vw;
-    }
+#logo{
+  width: 8vw;
+}
 
-    .right{
-      font-size: 3vw;
-    }
+#right{
+  align-self: center;
+  // justify-content: flex-end;
+  font-size: 2vw;
+}
+
+#time{
+  justify-content: right;
+
 }
 
 </style>

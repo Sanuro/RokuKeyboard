@@ -1,8 +1,8 @@
 <template>
   <div id="Ad">
 
-   <img v-if='showMenu' @keydown='nextAd' src='/static/image/Claritin_ad.jpg'/>
-
+   <img v-if='showMenu' @keydown='showAd' src='/static/image/Claritin_ad.jpg'/>
+  
   </div>
 </template>
 
@@ -17,14 +17,11 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener('keydown', this.nextAd);
+    window.addEventListener('keydown', this.showAd);
   },
-//   beforeDestroy() {
-//     window.removeEventListener('keydown', this.onKeyDown);
-//     window.removeEventListener('keyup', this.onKeyUp);
-//   },
+
   methods: {
-    nextAd() {
+    showAd() {
       if (event.keyCode === 39) {
         if (this.showDiv < 3) {
           this.showDiv++;
@@ -45,14 +42,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 
 #Ad{
   margin: 5px;
 }
 
 img{
-  justify-content: flex-end;
-  width: 30vw;
+  /* justify-content: flex-end; */
+  width: 25vw;
+  margin-left: 7vw;
+  // margin-right: 3%;
 }
 </style>
