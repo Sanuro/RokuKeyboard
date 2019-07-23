@@ -41,13 +41,18 @@ export default {
   },
   methods: {
     nextImage() {
+      let i = 0;
+
       if (event.keyCode === 39 && !this.showPictures) {
         this.showPictures = true;
         console.log(this.row, this.column);
       } else if (event.keyCode === 39 && this.showPictures) {
         console.log('right');
-        this.row++;
-        this.currentImage = this.images[this.row][this.column].id;
+        if (this.row < 2) {
+          this.row++;
+          this.currentImage = this.images[this.row][this.column].id;
+          console.log(this.row, this.column);
+        }
       } else if (event.keyCode === 37) {
         console.log('left');
         if (this.row === 0) {
@@ -58,18 +63,19 @@ export default {
         }
       } else if (event.keyCode === 40 && this.showPictures) {
         console.log('down');
-        this.column++;
-        this.currentImage = this.images[this.row][this.column].id;
-        // this.images = temp;
-        // this.images.push(this.images[0]);
-        // this.images.splice(this.column - 1, 1);
-        // this.images.push(temp);
-        // this.images.splice(2, 0, temp);
-        // arr.push(this.data.slice(i * COLUMN, (i + 1) * COLUMN));
+        // this.column++;
+        for (i = 0; i < this.images.length; i++) {
+          this.images[i].push(this.images[i].shift());
+        }
+        this.currentImage = this.images[this.row][0].id;
+        console.log(this.row, this.column);
       } else if (event.keyCode === 38 && this.showPictures) {
         console.log('up');
-        this.column--;
-        this.currentImage = this.images[this.row][this.column].id;
+        // this.column--;
+        for (i = 0; i < this.images.length; i++) {
+          this.images[i].push(this.images[i].shift());
+        }
+        this.currentImage = this.images[this.row][0].id;
       }
     },
   },
@@ -83,15 +89,13 @@ img{
 .AppMenu{
   display: flex;
   width: 65vw;
-  /* justify-content: center; */
 }
 
 #apps{
   width: 95%;
-  /* justify-content: center; */
 }
 .active-image {
-  outline: 4px solid #eee9e9;
+  outline: 0.5vw solid #eee9e9;
   /* transition: translate; */
   /* transform: translate(20px, 20px); */
   /* transform: scale(2); */

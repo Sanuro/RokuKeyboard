@@ -62,24 +62,19 @@ export default {
 
 <style>
 body{
-  /* height: 100%; */
   background-image: url('../static/image/Newman_TRC_Background.jpg');
   background-color: black;
   background-repeat: no-repeat;
   background-size: auto;
   overflow: hidden;
-  /* height: 95vh; */
 }
 
 #app{
-  /* padding: -20vh; */
-
   height: 100vh;
 }
 #main_app{
   display: flex;
   justify-content: stretch;
-  /* justify-content: center; */
 }
 
 #homeMenu{
@@ -87,14 +82,10 @@ body{
 #appMenuBox{
   height: 60vh;
   justify-content: center;
-  /* width: 65vw; */
-  /* display: inline-block; */
 }
 #ad{
-  /* position: relative; */
 }
 #appMenu{
-  /* display: flex; */
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -102,6 +93,5 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* font-size: 150%; */
 }
 </style>

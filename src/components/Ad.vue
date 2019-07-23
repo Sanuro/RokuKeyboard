@@ -5,7 +5,7 @@
 
   </div>
 </template>
-v-bind:class='{active:isActive}'
+
 <script>
 
 export default {
@@ -25,14 +25,19 @@ export default {
 //   },
   methods: {
     nextAd() {
-      if (event.keyCode === 39 && !this.showMenu) {
-        this.showMenu = !this.showMenu;
-        this.showDiv = 3;
-      } else if (event.keyCode === 37 && this.showMenu) {
+      if (event.keyCode === 39) {
+        if (this.showDiv < 3) {
+          this.showDiv++;
+        }
+        if (this.showDiv > 0) {
+          this.showMenu = true;
+        }
+      } else if (event.keyCode === 37) {
         if (this.showDiv > 0) {
           this.showDiv--;
-        } if (this.showDiv === 0) {
-          this.showMenu = !this.showMenu;
+        }
+        if (this.showDiv === 0) {
+          this.showMenu = false;
         }
       }
     },
@@ -43,15 +48,11 @@ export default {
 <style>
 
 #Ad{
-  /* display: flex; */
   margin: 5px;
 }
 
 img{
   justify-content: flex-end;
-  width: 25vw;
-    /* position: relative; */
-    /* float: right; */
-    /* display: inline-block; */
+  width: 30vw;
 }
 </style>

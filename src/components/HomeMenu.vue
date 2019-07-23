@@ -48,7 +48,7 @@ export default {
         }
       } else if (event.keyCode === 39) {
         console.log('right');
-        if (this.showDiv < 4) {
+        if (this.showDiv < 3) {
           this.showDiv++;
         }
       } else if (event.keyCode === 37) {
@@ -75,9 +75,11 @@ export default {
 .active-item {
   background-color: #eee9e9;
   color: black;
+  border-radius: 10px;
+  transition-timing-function: ease-in;
   transition: 0.5s;
+  /* transform: scale(1.05); */
   /* transition: transform 0.5s; */
-
 }
 
 

@@ -50,7 +50,6 @@ export default {
 
     .logo{
       width: 15vw;
-      // margin: 1% 0% 1% 1%;
     }
 
     .right{
