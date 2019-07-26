@@ -3,7 +3,7 @@
   <div id='header'>
 
       <div id='left'>
-        <img id='logo' class="logo" alt='roku image' src="../../static/image/large_roku.png">
+        <img id='logo' class="logo" alt='roku image' src="/static/image/large_roku.png">
       </div>
 
       <div id='right'>

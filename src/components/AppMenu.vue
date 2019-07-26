@@ -40,24 +40,36 @@ export default {
     document.addEventListener('keydown', this.nextImage);
   },
   methods: {
-    nextImage() {
+    nextImage(event) {
       let i = 0;
-
-      if (event.keyCode === 39 && !this.showPictures) {
-        this.showPictures = true;
-        console.log(this.row, this.column);
-      } else if (event.keyCode === 39 && this.showPictures) {
+      console.log(this.row, this.column, this.showPictures);
+      if (event.keyCode === 13) {
+        // this.showPictures = !this.showPictures;
+      }
+      if (event.keyCode === 39) {
         console.log('right');
-        if (this.row < 2) {
+        if (this.row === 0 && !this.showPictures) {
+          this.showPictures = true;
+        } else if (this.row < 2) {
           this.row++;
           this.currentImage = this.images[this.row][this.column].id;
-          console.log(this.row, this.column);
+          // console.log(this.row, this.column);
           // document.getElementById('apps').classList.add('image-slide');
+        } else if (this.row === 2) {
+          // console.log('App Gone');
+          this.showPictures = false;
+          this.row++;
+          // if (this.row > 2) {
+          //   this.showPictures = false;
+          // }
         }
       } else if (event.keyCode === 37) {
         console.log('left');
         if (this.row === 0) {
           this.showPictures = false;
+        } else if (this.row === 3) {
+          this.showPictures = true;
+          this.row--;
         } else {
           this.row--;
           this.currentImage = this.images[this.row][this.column].id;
@@ -69,7 +81,7 @@ export default {
           this.images[i].push(this.images[i].shift());
         }
         this.currentImage = this.images[this.row][0].id;
-        console.log(this.row, this.column);
+        // console.log(this.row, this.column);
       } else if (event.keyCode === 38 && this.showPictures) {
         console.log('up');
         // this.column--;

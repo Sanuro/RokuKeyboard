@@ -31,7 +31,8 @@ export default {
     document.addEventListener('keydown', this.nextItem);
   },
   methods: {
-    nextItem() {
+    nextItem(event) {
+      console.log(this.showHomeMenu, 'homemenu');
       if (event.keyCode === 38) {
         this.currentItem--;
         console.log('upping');
@@ -47,7 +48,7 @@ export default {
         }
       } else if (event.keyCode === 39) {
         console.log('right');
-        if (this.showHomeMenu < 3) {
+        if (this.showHomeMenu < 4) {
           this.showHomeMenu++;
         }
       } else if (event.keyCode === 37) {
@@ -64,7 +65,7 @@ export default {
 <style scoped>
 
 .HomeMenu{
-    width: 25vw;
+    min-width: 25vw;
     color: #eee9e9;
     font-size: 2vw;
     margin: 5px;
