@@ -18,6 +18,7 @@ import Header from './components/Header';
 import HomeMenu from './components/HomeMenu';
 import AppMenu from './components/AppMenu';
 import Ad from './components/Ad';
+
 // import modal from './components/ModalBox';
 
 // import ModalBox from './components/ModalBox';
@@ -47,9 +48,9 @@ export default {
       this.isModalVisible = false;
     },
   },
-  // mounted() {
-  //   window.addEventListener('keydown', this.onKeyDown);
-  // },
+  mounted() {
+    window.addEventListener('keydown', this.onKeyDown);
+  },
   // beforeDestroy() {
   //   window.removeEventListener('keydown', this.onKeyDown);
   // },

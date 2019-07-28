@@ -10,8 +10,9 @@
           </slot>
         </header>
 
-        <section class="modal-body" id="modalDescription">
-          <div id='selectedOption'>hello</div>
+        <section v-bind:class="{'active': isActive}" class="modal-body" id="modalDescription">
+          <!-- <div id='selectedOption'>hello</div> -->
+
           <slot id='ABCKeyboard' name="body">
             ABCKeyboard
           </slot>
@@ -45,6 +46,7 @@ export default {
 
   data() {
     return {
+      isActive: false,
     };
   },
   // methods: {
@@ -72,8 +74,8 @@ export default {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-    width: 80vw;
-    height: 90vh;
+    width: 100vw;
+    height: 100vh;
   }
 
   .modal-header,
@@ -95,7 +97,11 @@ export default {
 
   .modal-body {
     position: relative;
+    justify-content: space-between;
     padding: 20px 10px;
+  }
+  .active {
+    outline: 5px solid purple;
   }
 
   // .btn-close {
