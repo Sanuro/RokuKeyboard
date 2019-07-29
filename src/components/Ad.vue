@@ -20,6 +20,11 @@ export default {
   components: {
     modal,
   },
+  computed: {
+    modal() {
+      return this.$store.state.isKeyboardModal;
+    },
+  },
   data() {
     return {
       isActive: false,
@@ -38,40 +43,46 @@ export default {
     showModal(event) {
       if (event.keyCode === 13 && this.isActive) {
         this.isModalVisible = true;
+        // console.log('enter');
+        this.$store.commit('changeModal', true);
       }
     },
     closeModal(event) {
-      if (event.keyCode === 27) {
+      if (event.keyCode === 66 || event.keyCode === 72) {
         this.isModalVisible = false;
-        // console.log('esc being pressed');
+        // console.log('b');
+        this.$store.commit('changeModal', false);
+        // console.log('b being pressed');
       }
     },
     showAd(event) {
-      if (event.keyCode === 39) {
-        console.log('right');
-        if (this.counter < 4) {
-          this.counter++;
-          // console.log(this.counter);
-        }
-        if (this.counter > 0) {
-          this.showAdBox = true;
-          if (this.counter === 4) {
-            this.isActive = true;
+      if (this.$store.state.isKeyboardModal === false) {
+        if (event.keyCode === 39) {
+          // console.log('right');
+          if (this.counter < 4) {
+            this.counter++;
+            // console.log(this.counter);
+          }
+          if (this.counter > 0) {
+            this.showAdBox = true;
+            if (this.counter === 4) {
+              this.isActive = true;
+            }
+          }
+        } else if (event.keyCode === 37) {
+          // console.log('left');
+          if (this.counter > 0) {
+            if (this.counter === 1) {
+              this.showAdBox = false;
+            }
+            this.counter--;
+            this.isActive = false;
           }
         }
-      } else if (event.keyCode === 37) {
-        console.log('left');
-        if (this.counter > 0) {
-          if (this.counter === 1) {
-            this.showAdBox = false;
-          }
-          this.counter--;
-          this.isActive = false;
-        }
+        // if (event.keyCode === 13) {
+        // }
+        // console.log(this.counter, 'Ad', this.isActive);
       }
-      // if (event.keyCode === 13) {
-      // }
-      console.log(this.counter, 'Ad', this.isActive);
     },
   },
 };

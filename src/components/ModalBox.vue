@@ -5,7 +5,7 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            Keyboards (press 'esc' to close)
+            <!-- Keyboards (press 'esc' to close) -->
 
           </slot>
         </header>
@@ -14,11 +14,11 @@
           <!-- <div id='selectedOption'>hello</div> -->
 
           <slot id='ABCKeyboard' name="body">
-            ABCKeyboard
+            <!-- ABCKeyboard -->
           </slot>
 
           <slot id='T9Keyboard' name="body">
-            T9Keyboard
+            <!-- T9Keyboard -->
           </slot>
           
           <slot id='J9Keyboard' name="body">
@@ -28,7 +28,9 @@
 
         <footer class="modal-footer">
           <slot name="footer">
-            Footer
+            <!-- Footer -->
+            <J9Keyboard id='ModalJ9Keyboard'>
+            </J9Keyboard>
 
           </slot>
         </footer>
@@ -40,10 +42,14 @@
 
 </template>
 <script>
+import J9Keyboard from '../components/keyboards/J9Keyboard';
+
 export default {
   // name: 'ModalBox',
   name: 'modal',
-
+  components: {
+    J9Keyboard,
+  },
   data() {
     return {
       isActive: false,
@@ -69,19 +75,20 @@ export default {
   }
 
   .modal {
-    background: #FFFFFF;
+    background: #F5F5F5;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    height: 100vh;
+    width: 80vw;
+    height: 90vh;
+    overflow: hidden;
   }
 
   .modal-header,
   .modal-footer {
     padding: 15px;
-    display: flex;
+    // display: flex;
   }
 
   .modal-header {
@@ -92,12 +99,12 @@ export default {
 
   .modal-footer {
     border-top: 1px solid #eeeeee;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
   .modal-body {
     position: relative;
-    justify-content: space-between;
+    // justify-content: space-between;
     padding: 20px 10px;
   }
   .active {

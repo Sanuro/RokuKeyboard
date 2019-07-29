@@ -11,6 +11,11 @@
 <script>
 export default {
   name: 'HomeMenu',
+  computed: {
+    modal() {
+      return this.$store.state.isKeyboardModal;
+    },
+  },
   data() {
     return {
       showHomeMenu: 0,
@@ -32,29 +37,36 @@ export default {
   },
   methods: {
     nextItem(event) {
-      console.log(this.showHomeMenu, 'homemenu');
-      if (event.keyCode === 38) {
-        this.currentItem--;
-        console.log('upping');
-        if (this.currentItem === 0) {
-          this.currentItem = 8;
-          console.log('reached end');
-        }
-      } else if (event.keyCode === 40) {
-        this.currentItem++;
-        console.log('downing');
-        if (this.currentItem === 9) {
-          this.currentItem = 1;
-        }
-      } else if (event.keyCode === 39) {
-        console.log('right');
-        if (this.showHomeMenu < 4) {
-          this.showHomeMenu++;
-        }
-      } else if (event.keyCode === 37) {
-        console.log('left');
-        if (this.showHomeMenu > 0) {
-          this.showHomeMenu--;
+      if (this.$store.state.isKeyboardModal === false) {
+        console.log(this.showHomeMenu, 'homemenu');
+        if (event.keyCode === 38) {
+          this.currentItem--;
+
+          // console.log('upping');
+          if (this.currentItem === 0) {
+            this.currentItem = 8;
+            // console.log('reached end');
+          }
+        } else if (event.keyCode === 40) {
+          this.currentItem++;
+          // console.log(this.$store.state.isKeyboardModal);
+          // console.log('downing');
+          if (this.currentItem === 9) {
+            this.currentItem = 1;
+          }
+        } else if (event.keyCode === 39) {
+          // console.log('right');
+          if (this.showHomeMenu < 4) {
+            this.showHomeMenu++;
+            this.$store.commit('focusChange', 'appMenu');
+            // console.log(this.showHomeMenu);
+          }
+        } else if (event.keyCode === 37) {
+          // console.log('left');
+          if (this.showHomeMenu > 0) {
+            this.showHomeMenu--;
+            // console.log(this.showHomeMenu);
+          }
         }
       }
     },

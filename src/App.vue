@@ -18,6 +18,7 @@ import Header from './components/Header';
 import HomeMenu from './components/HomeMenu';
 import AppMenu from './components/AppMenu';
 import Ad from './components/Ad';
+import KeyController from './components/KeyController';
 
 // import modal from './components/ModalBox';
 
@@ -31,6 +32,7 @@ export default {
     HomeMenu,
     AppMenu,
     Ad,
+    KeyController,
     // modal,
     // ModalBox,
     // KeyboardMenu,
