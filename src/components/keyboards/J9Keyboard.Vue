@@ -8,7 +8,7 @@
   <div id='J9Keyboard'>
 
     <div id='letters' v-if='showJ9Keyboard === 0' @keydown='J9'>
-      <ul v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
+      <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
         <!-- <li> -->
           {{letter.text}}
         <!-- </li> -->
@@ -27,8 +27,8 @@
     <span id='legendInfo'>delete</span>
     <img src='/static/image/icon_RWx2.png'>
     <!-- <span id='legendInfo'>back</span>
-    <img src='static/image/Icon_Back_MH.png'> -->
-    <!-- <span id='legendInfo'>home</span>
+    <img src='static/image/Icon_Back_MH.png'> 
+    <span id='legendInfo'>home</span>
     <img src='static/image/Icon_Home_MH.png'> -->
 
   </div>
@@ -47,8 +47,14 @@ export default {
   },
   data() {
     return {
-      i: 0,
+      i: -1,
       placeholderJ9: '',
+      // setTimeoutHandle: '',
+      timer: 0,
+      pause: 0,
+      difTolerance: 300,
+      startTime: 0,
+      endTime: 0,
       showJ9Keyboard: 0,
       currentLetter: 1,
       // letters: [
@@ -82,6 +88,26 @@ export default {
     document.addEventListener('keydown', this.J9);
   },
   methods: {
+    // grab id from textArray
+    // when pressing Enter cycle through the textArray elements
+    // have a timer function to register when 'Enter' is no longer being pressed
+    // after timer function complets, logs the textArray element into input
+    // direction arrow completes timer function
+
+
+    timerFunc() {
+      this.placeholderJ9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
+      // console.log('letter logged', this.i);
+      this.i = -1;
+    },
+    checkPause() {
+      this.endTime = new Date().getTime();
+      if (this.endTime - this.startTime >= this.difTolerance) {
+        clearTimeout(this.timer);
+        this.timerFunc();
+        // console.log('clearing timer');
+      }
+    },
     J9(event) {
       if (event.keyCode === 8) {
         this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
@@ -95,32 +121,31 @@ export default {
         this.placeholderJ9 += '_';
         // space space play/pause
       }
+      clearTimeout(this.timer);
       if (event.keyCode === 13) {
-        // for (i; i < this.letters[this.currentLetter - 1].textArray.length; i++) {
-        // }
-        // i++;
-        this.placeholderJ9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
-        console.log(this.placeholderJ9);
+        this.startTime = new Date().getTime();
+        this.timer = setTimeout(this.checkPause);
         this.i = (this.i + 1) % 3;
+        console.log('enter pressed');
       } else {
-        this.i = 0;
+        this.i = -1;
         if (event.keyCode === 38) {
           if (this.currentLetter !== 1 && this.currentLetter !== 4 && this.currentLetter !== 7) {
             this.currentLetter--;
-            console.log('upping', this.currentLetter);
+            // console.log('upping', this.i);
           }
         } else if (event.keyCode === 40) {
           if (this.currentLetter !== 3 && this.currentLetter !== 6 && this.currentLetter !== 9) {
             this.currentLetter++;
           }
-          console.log('downing');
+          // console.log('downing');
         } else if (event.keyCode === 39) {
-          console.log('right');
+          // console.log('right');
           if (this.currentLetter < 7) {
             this.currentLetter += 3;
           }
         } else if (event.keyCode === 37) {
-          console.log('left');
+          // console.log('left');
           if (this.currentLetter > 3) {
             this.currentLetter -= 3;
           }
@@ -133,73 +158,94 @@ export default {
 </script>
 <style lang="scss" scoped>
 
+#container{
+  position: relative;
+  display: flex;
+  // width: 100%;
+  // height: 100%;
+}
+
 input{
   // justify-content: space-between;
   width: 80%;
-  border: 2px solid #6C3B97;
-  background-color: rgba(153, 12, 196, 0.39);
+  // border: 2px solid #6C3B97;
+  background-color: #efefef;;
   opacity: 50%;
   border-radius: 5px;
-  // padding: 10%;
-  color: white;
+  color: rgba(0,0,0,0.6);
   font-size: 150%;
   padding: 2%;
   box-shadow: inset 0px 0px 5px black;
-  // padding-bottom: 30%;
+  box-sizing: border-box;
+  border-radius: 5px;
+
 }
 
 #J9Keyboard{
   padding-top: 5vh;
-  // height: 100vh;
-  width: 100%;
-  column-count: 3;
+  // width: 100%;
+  // height: 100%;
+  // column-count: 3;
   font-size: 2vw;
-  // margin-right: 40vw;
-  // display: block;
-  // padding-bottom: 5vh;
-  // margin-bottom: 5vh;
-  // display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  // flex-direction: column;
+  // flex-direction: row;
+  // flex-flow: row wrap;
+  // height: 50vh;
+  // width: 50vw;
 }
+
+#letters{
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  background-color: #efefef;
+  border-radius: 5px;
+  // flex-flow: nowrap;
+  // box-shadow: 0px 0px 5px black;
+  column-count: 3;
+  column-gap: 0px;
+  // column-rule: 1px solid #6C3B97;
+  // width: 80%;
+}
+
+#listLetter{
+  // padding: 25%;
+  padding: 10% 5% 10% 5%;
+  border-radius: 5px;
+  outline: 4px solid #E5E5E5;
+  // box-shadow: 0px 0px 5px black;
+
+  // border: 4 solid #E5E5E5;
+
+
+}
+
 #legend{
   display: flex; 
   margin-top: 5vh;
   justify-content: center;
-  // padding-right: 40vw
-  // justify-content: flex-start;
-  // position: relative;
-  // justify-content: flex-start;
-  // background-color: purple;
+
 }
 
 #legendInfo{
   font-size: 2vw;
   margin: 0 1% 0 3%;
-  // padding: 0 3% 0 3%;
 }
 
 img{
   background-color: black;
   padding: 1%;
   border-radius: 5px;
-  // column-count: 3;
-  // display: flex;
 }
 
-// .letters{
-//   background-color: purple;
-// }
-
-
 .active-letter {
-  // padding: 5px;
-  // transform: scale(1.1);
   align-content: space-between;
-  background-color: rgba(153, 12, 196, 0.39);
-  color: white;
-  // box-shadow: inset 0px 0px 3px black;
+  background-color:#7540c4;
+  color: #efefef;
   border-radius: 5px;
-  // box-shadow: 1px 1px 5px black;
-  // justify-content: start;
 }
 
 
