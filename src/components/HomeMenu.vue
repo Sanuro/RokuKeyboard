@@ -1,6 +1,6 @@
 <template>
 
-    <div id='homeMenu' v-if='showHomeMenu === 0' class='HomeMenu'>
+    <div id='homeMenu' v-if='showHomeMenu' class='HomeMenu'>
         <ul v-for='item in items' :key='item.id' :class='{"active-item": focused && currentItem === item.id}'>
             {{item.text}}
         </ul>
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      showHomeMenu: 0,
+      showHomeMenu: true,
       currentItem: 1,
       items: [
         { id: 1, text: 'Home' },
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     keyDownHandler(keyCode) {
-      console.log(this.showHomeMenu, 'homemenu');
+      // console.log(this.showHomeMenu, 'homemenu');
       switch (keyCode) {
         case 38:
           // up
@@ -55,21 +55,24 @@ export default {
           break;
         case 39:
           // right
-          if (this.showHomeMenu < 4) {
-            this.showHomeMenu++;
-            this.$store.commit('focusChange', 'grid');
-            this.$emit('right');
+          // if (this.showHomeMenu === true) {
+            // this.showHomeMenu++;
+          console.log('this.showHomeMenu', this.showHomeMenu);
+          this.$store.commit('focusChange', 'grid');
+          this.$emit('right');
+          this.showHomeMenu = false;
             // console.log('focus changed', this.$store.commit('focusChange', 'grid'));
-          }
+          // }
           break;
         case 37:
           // left
-          // this.$emit('left');
-          if (this.showHomeMenu > 0) {
-            this.showHomeMenu--;
+          if (this.showHomeMenu === false) {
+            // this.$emit('left');
+            // this.$store.commit('focusChange', 'menu');
+            // this.$emit('left');
+            this.showHomeMenu = true;
           }
           break;
-          // console.log(this.showHomeMenu);
         default: break;
       }
       // if (keyCode === 38) {

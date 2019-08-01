@@ -8,6 +8,7 @@
         </div>
         <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" ref="ad">ad
         </Ad>
+        <!-- <ModalBox id='modal' :focused="focusTarget==='dialog'" @enter='focustarget=' -->
       </div>
   </div>
 </template>

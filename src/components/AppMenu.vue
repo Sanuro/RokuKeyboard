@@ -2,7 +2,7 @@
 
     <div class='AppMenuContainer'>
       <div id='appMenu' v-for='row in images'>
-        <img id='apps' v-for="col in row" v-bind:src="col.url" :key="col.id" :class='{"active-image": focused && currentImage === col.id}' :alt="col.alt" />
+        <img id='apps' v-for="col in row" v-bind:src="col.url" :key="col.id" :class='{"active-image": focused && currentImageId === col.id}' :alt="col.alt" />
       </div>
 
     </div>
@@ -21,10 +21,9 @@ export default {
   },
   data() {
     return {
-      // showPictures: false,
       row: 0,
       column: 0,
-      currentImage: 1,
+      currentImageId: 1,
       images: [
         [
           { id: 1, url: '/static/image/aquatic.png', alt: 'aquatic' },
@@ -54,50 +53,42 @@ export default {
       switch (keyCode) {
         case 38:
           // up
-          if (this.showPictures) {
-            for (i = 0; i < this.images.length; i++) {
-              this.images[i].unshift(this.images[i].pop());
-            }
+          for (i = 0; i < this.images.length; i++) {
+            this.images[i].unshift(this.images[i].pop());
             document.getElementById('appMenu').classList.add('smooth');
-            this.currentImage = this.images[this.row][0].id;
+            this.currentImageId = this.images[this.row][0].id;
           }
           break;
         case 40:
           // down
-          if (this.showPictures) {
-            for (i = 0; i < this.images.length; i++) {
-              this.images[i].push(this.images[i].shift());
-            }
-            this.currentImage = this.images[this.row][0].id;
+          for (i = 0; i < this.images.length; i++) {
+            this.images[i].push(this.images[i].shift());
           }
+          this.currentImageId = this.images[this.row][0].id;
           break;
         case 39:
           // right
-          if (this.row === 0 && !this.showPictures) {
-            this.showPictures = true;
-          } else if (this.row < 2) {
+          if (this.row < 2) {
             this.row++;
-            this.currentImage = this.images[this.row][this.column].id;
+            this.currentImageId = this.images[this.row][this.column].id;
+            console.log(this.row);
           } else if (this.row === 2) {
-            // this.showPictures = false;
-            this.row++;
-            this.$emit('right');
             this.$store.commit('focusChange', 'ad');
+            this.$emit('right');
           }
           break;
         case 37:
           // left
           if (this.row === 0) {
-            // this.showPictures = false;
-            this.$emit('left');
+            console.log('extra');
             this.$store.commit('focusChange', 'menu');
+            this.$emit('left');
             // console.log('going left for home');
-          } else if (this.row === 3) {
-            // this.showPictures = true;
+          } else if (this.row === 4) {
             this.row--;
           } else {
             this.row--;
-            this.currentImage = this.images[this.row][this.column].id;
+            this.currentImageId = this.images[this.row][this.column].id;
           }
           break;
         default: break;

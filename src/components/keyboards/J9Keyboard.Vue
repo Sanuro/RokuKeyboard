@@ -111,13 +111,13 @@ export default {
       }
     },
     J9(event) {
-      if (event.keyCode === 8) {
+      if (event.keyCode === 82) {
         this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
-        //  backspace clear rewind
+        //  r delete
       }
-      if (event.keyCode === 67) {
+      if (event.keyCode === 73) {
         this.placeholderJ9 = '';
-        //  c delete backtrack
+        //  i clear
       }
       if (event.keyCode === 32) {
         this.placeholderJ9 += '_';

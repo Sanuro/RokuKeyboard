@@ -1,13 +1,13 @@
 <template>
   <div id="Ad">
 
-   <img v-if='showAdBox' v-bind:class="{'active': isActive && focused}" src='/static/image/Claritin_ad.jpg'/>
+   <img v-if='showAdBox' v-bind:class="{'active': focused &&isActive}" src='/static/image/Claritin_ad.jpg'/>
   <!-- <div id='adBox'> hello
     </div> -->
 
     <!-- <div id='modal' class="btn" @keydown="showModal"> -->
     <!-- </div> -->
-    <modal v-show="isModalVisible" @keydown="closeModal" ref="modal"/>
+    <modal v-show="isModalVisible" ref="modal"/>
 
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       isActive: false,
-      showAdBox: false,
+      showAdBox: true,
       counter: 0,
       isModalVisible: false,
     };
@@ -44,17 +44,17 @@ export default {
 
   methods: {
     keyDownHandler(keyCode) {
-      console.log(this.showHomeMenu, 'ad');
+      // console.log(this.showHomeMenu, 'ad');
       if (this.$store.state.isKeyboardModal === false) {
         switch (keyCode) {
           case 39:
             //  right
-            if (this.counter < 4) {
+            if (this.counter < 1) {
               this.counter ++;
             }
             if (this.counter > 0) {
-              this.showAdBox = true;
-              if (this.counter === 4) {
+              // this.showAdBox = true;
+              if (this.counter === 1) {
                 this.isActive = true;
               }
             }
@@ -62,10 +62,11 @@ export default {
           case 37:
             //  left
             this.$emit('left');
+            this.$store.commit('focusChange', 'grid');
             if (this.counter > 0) {
-              if (this.counter === 1) {
-                this.showAdBox = false;
-              }
+              // if (this.counter === 1) {
+              //   this.showAdBox = false;
+              // }
               this.counter--;
               this.isActive = false;
             }
