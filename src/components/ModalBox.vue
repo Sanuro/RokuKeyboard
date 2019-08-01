@@ -29,8 +29,7 @@
         <footer class="modal-footer">
           <slot name="footer">
             <!-- Footer -->
-            <J9Keyboard id='ModalJ9Keyboard'>
-            </J9Keyboard>
+            <component :is="keybaordMode" id='ModalJ9Keyboard'/>
 
           </slot>
         </footer>
@@ -42,20 +41,23 @@
 
 </template>
 <script>
-import J9Keyboard from '../components/keyboards/J9Keyboard';
+import J9 from '../components/keyboards/J9Keyboard';
+import T9 from '../components/keyboards/T9Keyboard';
 
 export default {
   // name: 'ModalBox',
   name: 'modal',
   components: {
-    J9Keyboard,
+    J9,
+    T9,
   },
   data() {
     return {
       isActive: false,
+      keybaordMode: 'J9',
     };
   },
-  // methods: {
+  // methods: {z
 
   // },
 };
@@ -75,7 +77,7 @@ export default {
   }
 
   .modal {
-    background: #F5F5F5;
+    background: #e5e5e5;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
     display: flex;

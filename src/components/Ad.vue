@@ -7,7 +7,7 @@
 
     <div id='modal' class="btn" @keydown="showModal">
     </div>
-    <modal v-show="isModalVisible" @keydown="closeModal"/>
+    <modal v-show="isModalVisible" @keydown="closeModal" ref="modal"/>
 
   </div>
 </template>

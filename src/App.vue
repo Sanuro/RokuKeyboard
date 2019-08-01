@@ -2,14 +2,12 @@
   <div id='app'>
     <Header id='header'>header</Header>
       <div id='main_app'>
-
-        <HomeMenu id='homeMenu'>homeMenu</HomeMenu>
+        <HomeMenu id='homeMenu' ref='menu' :focused="focusTarget==='menu'" @right="focusTarget='grid'">homeMenu</HomeMenu>
         <div id='appMenuBox'>
-          <AppMenu id='appMenu'>appMenu</AppMenu>
+          <AppMenu id='appMenu' :focused="focusTarget==='grid'" @right="focusTarget='ad'" ref="grid" >appMenu</AppMenu>
         </div>
-        <Ad id='ad'>ad
+        <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" ref="ad">ad
         </Ad>
-         
       </div>
   </div>
 </template>
@@ -33,14 +31,16 @@ export default {
     AppMenu,
     Ad,
     KeyController,
-    // modal,
-    // ModalBox,
-    // KeyboardMenu,
   },
   data() {
     return {
       isModalVisible: false,
+      focusTarget: null,
     };
+  },
+  beforeMount() {
+    window.addEventListener('keydown', this.onKeyDown);
+    this.focusTarget = 'menu';
   },
   methods: {
     showModal() {
@@ -49,13 +49,11 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     },
+    onKeyDown(e) {
+      this.$refs[this.focusTarget].keyDownHandler(e.keyCode);
+      // this.$refs[this.focusTarget].showAd(e.keyCode);
+    },
   },
-  mounted() {
-    window.addEventListener('keydown', this.onKeyDown);
-  },
-  // beforeDestroy() {
-  //   window.removeEventListener('keydown', this.onKeyDown);
-  // },
 
 };
 </script>

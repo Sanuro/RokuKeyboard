@@ -20,12 +20,12 @@
   <div id='legend'>
 
     <span id='legendInfo'>clear</span>
-    <img src='/static/image/icon_replay.png'>
+    <img id='legendImg' src='/static/image/icon_replay.png'>
     <span id='legendInfo'>space</span>
-    <img src='/static/image/icon_playVideo.png'>
-    <img src='/static/image/icon_pauseVideo.png'>
+    <img id='legendPlay' src='/static/image/icon_playVideo.png'>
+    <img id='legendPause' src='/static/image/icon_pauseVideo.png'>
     <span id='legendInfo'>delete</span>
-    <img src='/static/image/icon_RWx2.png'>
+    <img id='legendImg' src='/static/image/icon_RWx2.png'>
     <!-- <span id='legendInfo'>back</span>
     <img src='static/image/Icon_Back_MH.png'> 
     <span id='legendInfo'>home</span>
@@ -97,15 +97,17 @@ export default {
 
     timerFunc() {
       this.placeholderJ9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
-      // console.log('letter logged', this.i);
+      console.log('letter logged', this.i);
       this.i = -1;
+      // not being accessed
     },
     checkPause() {
       this.endTime = new Date().getTime();
       if (this.endTime - this.startTime >= this.difTolerance) {
         clearTimeout(this.timer);
         this.timerFunc();
-        // console.log('clearing timer');
+        console.log('clearing timer');
+        // not being accessed
       }
     },
     J9(event) {
@@ -159,15 +161,14 @@ export default {
 <style lang="scss" scoped>
 
 #container{
-  position: relative;
+  // position: relative;
   display: flex;
-  // width: 100%;
-  // height: 100%;
+  justify-content: center;
 }
 
 input{
   // justify-content: space-between;
-  width: 80%;
+  width: 50%;
   // border: 2px solid #6C3B97;
   background-color: #efefef;;
   opacity: 50%;
@@ -178,65 +179,60 @@ input{
   box-shadow: inset 0px 0px 5px black;
   box-sizing: border-box;
   border-radius: 5px;
-
 }
 
 #J9Keyboard{
-  padding-top: 5vh;
-  // width: 100%;
-  // height: 100%;
-  // column-count: 3;
+  padding-top: 3px;
   font-size: 2vw;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  // flex-direction: column;
-  // flex-direction: row;
-  // flex-flow: row wrap;
-  // height: 50vh;
-  // width: 50vw;
+  justify-content: space-around;
 }
 
 #letters{
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-between;
+  width: 50%;
+  height: 50%;
   background-color: #efefef;
   border-radius: 5px;
-  // flex-flow: nowrap;
-  // box-shadow: 0px 0px 5px black;
   column-count: 3;
   column-gap: 0px;
-  // column-rule: 1px solid #6C3B97;
-  // width: 80%;
 }
 
 #listLetter{
-  // padding: 25%;
-  padding: 10% 5% 10% 5%;
+  padding: 15% 0% 15% 0%;
+  // padding: 10% 5% 10% 5%;
+  // margin: 10%;
   border-radius: 5px;
-  outline: 4px solid #E5E5E5;
-  // box-shadow: 0px 0px 5px black;
-
-  // border: 4 solid #E5E5E5;
-
-
+  outline: 3px solid #E5E5E5;
 }
 
 #legend{
   display: flex; 
-  margin-top: 5vh;
-  justify-content: center;
-
+  // margin-top: 10%;
+  justify-content: space-between;
+  width: 50%;
+  margin: auto;
+  align-items: center;
 }
 
+#legendImg{
+  height: 3%;
+
+  filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+}
+#legendPlay{
+  margin-right: 4px; 
+  filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+}
+#legendPause{
+  margin-left: -2.5vw;
+  filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+}
 #legendInfo{
   font-size: 2vw;
   margin: 0 1% 0 3%;
 }
 
 img{
-  background-color: black;
   padding: 1%;
   border-radius: 5px;
 }
@@ -244,8 +240,9 @@ img{
 .active-letter {
   align-content: space-between;
   background-color:#7540c4;
-  color: #efefef;
+  color: #C5C5C5;
   border-radius: 5px;
+  // transform: scale(1.3);
 }
 
 

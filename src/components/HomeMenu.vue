@@ -1,6 +1,6 @@
 <template>
 
-    <div v-if='showHomeMenu === 0' class='HomeMenu' @keydown='nextItem'>
+    <div id='homeMenu' v-if='showHomeMenu === 0' class='HomeMenu'>
         <ul v-for='item in items' :key='item.id' :class='{"active-item": currentItem === item.id}'>
             {{item.text}}
         </ul>
@@ -10,7 +10,9 @@
 
 <script>
 export default {
-  name: 'HomeMenu',
+  props: {
+    focused: Boolean,
+  },
   computed: {
     modal() {
       return this.$store.state.isKeyboardModal;
@@ -32,43 +34,75 @@ export default {
       ],
     };
   },
-  mounted() {
-    document.addEventListener('keydown', this.nextItem);
-  },
   methods: {
-    nextItem(event) {
-      if (this.$store.state.isKeyboardModal === false) {
-        console.log(this.showHomeMenu, 'homemenu');
-        if (event.keyCode === 38) {
+    keyDownHandler(keyCode) {
+      console.log(this.showHomeMenu, 'homemenu');
+      switch (keyCode) {
+        case 38:
+          // up
           this.currentItem--;
-
-          // console.log('upping');
           if (this.currentItem === 0) {
             this.currentItem = 8;
-            // console.log('reached end');
+            console.log('reached end');
           }
-        } else if (event.keyCode === 40) {
+          break;
+        case 40:
+          // down
           this.currentItem++;
-          // console.log(this.$store.state.isKeyboardModal);
-          // console.log('downing');
           if (this.currentItem === 9) {
             this.currentItem = 1;
           }
-        } else if (event.keyCode === 39) {
-          // console.log('right');
+          break;
+        case 39:
+          // right
+          this.$emit('right');
           if (this.showHomeMenu < 4) {
             this.showHomeMenu++;
-            this.$store.commit('focusChange', 'appMenu');
-            // console.log(this.showHomeMenu);
+            this.$store.commit('focusChange', 'grid');
+            // console.log('focus changed', this.$store.commit('focusChange', 'grid'));
           }
-        } else if (event.keyCode === 37) {
-          // console.log('left');
+            // console.log(this.showHomeMenu);
+          break;
+        case 37:
+          // left
+          // this.$emit('left');
           if (this.showHomeMenu > 0) {
             this.showHomeMenu--;
-            // console.log(this.showHomeMenu);
           }
-        }
+          break;
+          // console.log(this.showHomeMenu);
+        default: break;
       }
+      // if (keyCode === 38) {
+      //   this.currentItem--;
+
+      //   // console.log('upping');
+      //   if (this.currentItem === 0) {
+      //     this.currentItem = 8;
+      //     // console.log('reached end');
+      //   }
+      // } else if (keyCode === 40) {
+      //   this.currentItem++;
+      //   // console.log(this.$store.state.isKeyboardModal);
+      //   // console.log('downing');
+      //   if (this.currentItem === 9) {
+      //     this.currentItem = 1;
+      //   }
+      // } else if (keyCode === 39) {
+      //   // console.log('right');
+      //   this.$emit('right');
+      //   if (this.showHomeMenu < 4) {
+      //     this.showHomeMenu++;
+      //     this.$store.commit('focusChange', 'appMenu');
+      //     // console.log(this.showHomeMenu);
+      //   }
+      // } else if (keyCode === 37) {
+      //   // console.log('left');
+      //   this.$emit('left');
+      //   if (this.showHomeMenu > 0) {
+      //     this.showHomeMenu--;
+      //     // console.log(this.showHomeMenu);
+      //   }
     },
   },
 };
