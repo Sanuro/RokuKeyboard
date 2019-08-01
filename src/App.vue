@@ -4,7 +4,7 @@
       <div id='main_app'>
         <HomeMenu id='homeMenu' ref='menu' :focused="focusTarget==='menu'" @right="focusTarget='grid'">homeMenu</HomeMenu>
         <div id='appMenuBox'>
-          <AppMenu id='appMenu' :focused="focusTarget==='grid'" @right="focusTarget='ad'" ref="grid" >appMenu</AppMenu>
+          <AppMenu id='appMenu' :focused="focusTarget==='grid'" @right="focusTarget='ad'" @left="focusTarget='menu'" ref="grid">appMenu</AppMenu>
         </div>
         <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" ref="ad">ad
         </Ad>

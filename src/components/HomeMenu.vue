@@ -1,7 +1,7 @@
 <template>
 
     <div id='homeMenu' v-if='showHomeMenu === 0' class='HomeMenu'>
-        <ul v-for='item in items' :key='item.id' :class='{"active-item": currentItem === item.id}'>
+        <ul v-for='item in items' :key='item.id' :class='{"active-item": focused && currentItem === item.id}'>
             {{item.text}}
         </ul>
     </div>
@@ -55,13 +55,12 @@ export default {
           break;
         case 39:
           // right
-          this.$emit('right');
           if (this.showHomeMenu < 4) {
             this.showHomeMenu++;
             this.$store.commit('focusChange', 'grid');
+            this.$emit('right');
             // console.log('focus changed', this.$store.commit('focusChange', 'grid'));
           }
-            // console.log(this.showHomeMenu);
           break;
         case 37:
           // left

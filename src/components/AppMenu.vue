@@ -2,7 +2,7 @@
 
     <div class='AppMenuContainer'>
       <div id='appMenu' v-for='row in images'>
-        <img id='apps' v-for="col in row" v-bind:src="col.url" :key="col.id" :class='{"active-image": currentImage === col.id && showPictures}' :alt="col.alt" />
+        <img id='apps' v-for="col in row" v-bind:src="col.url" :key="col.id" :class='{"active-image": focused && currentImage === col.id}' :alt="col.alt" />
       </div>
 
     </div>
@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      showPictures: false,
+      // showPictures: false,
       row: 0,
       column: 0,
       currentImage: 1,
@@ -79,7 +79,7 @@ export default {
             this.row++;
             this.currentImage = this.images[this.row][this.column].id;
           } else if (this.row === 2) {
-            this.showPictures = false;
+            // this.showPictures = false;
             this.row++;
             this.$emit('right');
             this.$store.commit('focusChange', 'ad');
@@ -88,12 +88,12 @@ export default {
         case 37:
           // left
           if (this.row === 0) {
-            this.showPictures = false;
-            this.$store.commit('focusChange', 'menu');
+            // this.showPictures = false;
             this.$emit('left');
-            console.log('going left for home');
+            this.$store.commit('focusChange', 'menu');
+            // console.log('going left for home');
           } else if (this.row === 3) {
-            this.showPictures = true;
+            // this.showPictures = true;
             this.row--;
           } else {
             this.row--;
