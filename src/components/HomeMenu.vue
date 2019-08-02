@@ -58,8 +58,9 @@ export default {
           // if (this.showHomeMenu === true) {
             // this.showHomeMenu++;
           console.log('this.showHomeMenu', this.showHomeMenu);
-          this.$store.commit('focusChange', 'grid');
+          // this.$store.commit('focusChange', 'grid');
           this.$emit('right');
+          console.log(this.focused);
           this.showHomeMenu = false;
             // console.log('focus changed', this.$store.commit('focusChange', 'grid'));
           // }

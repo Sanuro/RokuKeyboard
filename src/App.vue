@@ -6,9 +6,9 @@
         <div id='appMenuBox'>
           <AppMenu id='appMenu' :focused="focusTarget==='grid'" @right="focusTarget='ad'" @left="focusTarget='menu'" ref="grid">appMenu</AppMenu>
         </div>
-        <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" ref="ad">ad
+        <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" @enter="focusTarget==='dialog', isModalVisible=true" ref="ad">ad
         </Ad>
-        <!-- <ModalBox id='modal' :focused="focusTarget==='dialog'" @enter='focustarget=' -->
+        <ModalBox v-show='isModalVisible' id='modal' :focused="focusTarget==='dialog'" @back=" isModalVisible=false, focusTarget==='ad'" ref="dialog"></ModalBox>
       </div>
   </div>
 </template>
@@ -18,6 +18,7 @@ import HomeMenu from './components/HomeMenu';
 import AppMenu from './components/AppMenu';
 import Ad from './components/Ad';
 import KeyController from './components/KeyController';
+import ModalBox from '../src/components/ModalBox';
 
 // import modal from './components/ModalBox';
 
@@ -32,6 +33,12 @@ export default {
     AppMenu,
     Ad,
     KeyController,
+    ModalBox,
+  },
+  computed: {
+    dialog() {
+      return this.$store.state.isKeyboardModal;
+    },
   },
   data() {
     return {
@@ -72,17 +79,9 @@ body{
   height: 100vh;
 }
 
-#modal{
-  height: 20vh;
-}
-
 #main_app{
   display: flex;
   justify-content: stretch;
-}
-
-#modalBox{
-  /* width: 40vw;; */
 }
 
 #appMenuBox{

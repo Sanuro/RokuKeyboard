@@ -29,8 +29,8 @@
         <footer class="modal-footer">
           <slot name="footer">
             <!-- Footer -->
-            <component :is="keybaordMode" id='ModalJ9Keyboard'/>
-
+            <component ref='J9KeyboardRef' :is="keybaordMode" id='ModalJ9Keyboard'/>
+            
           </slot>
         </footer>
       </div>
@@ -57,9 +57,14 @@ export default {
       keybaordMode: 'J9',
     };
   },
-  // methods: {z
-
-  // },
+  beforeMount() {
+    window.addEventListener('keydown', this.onKeyDown);
+  },
+  methods: {
+    onKeyDown(e) {
+      this.$refs.J9KeyboardRef.keyDownHandler(e.keyCode);
+    },
+  },
 };
 </script>
 

@@ -10,7 +10,6 @@
 </template>
 <script>
 export default {
-  name: 'AppMenu',
   props: {
     focused: Boolean,
   },
@@ -49,6 +48,7 @@ export default {
   methods: {
     keyDownHandler(keyCode) {
       let i = 0;
+      console.log('app menu');
       // if (this.$store.state.isKeyboardModal === false) {
       switch (keyCode) {
         case 38:
@@ -70,24 +70,32 @@ export default {
           // right
           if (this.row < 2) {
             this.row++;
+
             this.currentImageId = this.images[this.row][this.column].id;
+            // if (this.row === 2) {
+            // }
             console.log(this.row);
+            console.log('39');
           } else if (this.row === 2) {
-            this.$store.commit('focusChange', 'ad');
+            this.row++;
             this.$emit('right');
+            // this.$store.commit('focusChange', 'ad');
+            console.log(this.focused);
+            console.log(this.row);
+            console.log('40');
           }
           break;
         case 37:
           // left
           if (this.row === 0) {
             console.log('extra');
-            this.$store.commit('focusChange', 'menu');
+            // this.$store.commit('focusChange', 'menu');
             this.$emit('left');
+            console.log(this.focused);
             // console.log('going left for home');
-          } else if (this.row === 4) {
-            this.row--;
           } else {
             this.row--;
+            console.log(this.row);
             this.currentImageId = this.images[this.row][this.column].id;
           }
           break;

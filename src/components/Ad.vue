@@ -1,27 +1,27 @@
 <template>
   <div id="Ad">
 
-   <img v-if='showAdBox' v-bind:class="{'active': focused &&isActive}" src='/static/image/Claritin_ad.jpg'/>
+   <img v-if='showAdBox' v-bind:class="{'active': focused && isActive}" src='/static/image/Claritin_ad.jpg'/>
   <!-- <div id='adBox'> hello
     </div> -->
 
     <!-- <div id='modal' class="btn" @keydown="showModal"> -->
     <!-- </div> -->
-    <modal v-show="isModalVisible" ref="modal"/>
+    <!-- <modal v-show="isModalVisible" ref="modal"/> -->
 
   </div>
 </template>
 
 <script>
-import modal from './ModalBox';
+// import modal from './ModalBox';
 
 export default {
   name: 'Ad',
   props: {
-    focused: Boolean,
+    focused: true,
   },
   components: {
-    modal,
+    // modal,
   },
   computed: {
     modal() {
@@ -30,10 +30,10 @@ export default {
   },
   data() {
     return {
-      isActive: false,
+      isActive: true,
       showAdBox: true,
       counter: 0,
-      isModalVisible: false,
+      // isModalVisible: false,
     };
   },
   mounted() {
@@ -44,13 +44,15 @@ export default {
 
   methods: {
     keyDownHandler(keyCode) {
+      console.log(this.$store.state.isKeyboardModal, this.counter);
       // console.log(this.showHomeMenu, 'ad');
       if (this.$store.state.isKeyboardModal === false) {
         switch (keyCode) {
           case 39:
             //  right
             if (this.counter < 1) {
-              this.counter ++;
+              this.counter++;
+              console.log(this.showAdBox);
             }
             if (this.counter > 0) {
               // this.showAdBox = true;
@@ -62,45 +64,50 @@ export default {
           case 37:
             //  left
             this.$emit('left');
-            this.$store.commit('focusChange', 'grid');
+            // this.$store.commit('focusChange', 'grid');
             if (this.counter > 0) {
               // if (this.counter === 1) {
               //   this.showAdBox = false;
               // }
+              console.log('pressing left');
               this.counter--;
               this.isActive = false;
             }
             break;
-          // case 13:
-          //   if (this.isActive) {
-          //     this.isModalVisible = true;
-          //     this.$store.commit('changeModal', true);
-          //   }
-          //   break;
+          case 13:
+            if (this.isActive) {
+              // this.isModalVisible = true;
+              this.$store.commit('changeModal', true);
+              this.$emit('enter');
+              // console.log('switch case in AD');
+            }
+            break;
           default: break;
         }
       }
       switch (keyCode) {
         case 66:
           // b
-          this.isModalVisible = false;
+          // this.isModalVisible = false;
           this.$store.commit('changeModal', false);
+          this.$emit('back');
+          console.log('keypressed b');
           break;
         case 72:
           // h
-          this.isModalVisible = false;
+          // this.isModalVisible = false;
           this.$store.commit('changeModal', false);
           break;
         default: break;
       }
     },
-    showModal(event) {
-      if (event.keyCode === 13 && this.isActive) {
-        this.isModalVisible = true;
-        // console.log('enter');
-        this.$store.commit('changeModal', true);
-      }
-    },
+    // showModal(event) {
+    //   if (event.keyCode === 13 && this.isActive) {
+    //     this.isModalVisible = true;
+    //     // console.log('enter');
+    //     this.$store.commit('changeModal', true);
+    //   }
+    // },
     // closeModal(event) {
     //   if (event.keyCode === 66 || event.keyCode === 72) {
     //     this.isModalVisible = false;

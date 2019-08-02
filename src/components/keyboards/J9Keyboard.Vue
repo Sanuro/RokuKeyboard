@@ -7,7 +7,8 @@
 
   <div id='J9Keyboard'>
 
-    <div id='letters' v-if='showJ9Keyboard === 0' @keydown='J9'>
+    <div id='letters' @keydown='J9'> 
+      <!-- had j9showkeyboard in letters -->
       <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
         <!-- <li> -->
           {{letter.text}}
@@ -52,10 +53,10 @@ export default {
       // setTimeoutHandle: '',
       timer: 0,
       pause: 0,
-      difTolerance: 300,
+      difTolerance: 400,
       startTime: 0,
       endTime: 0,
-      showJ9Keyboard: 0,
+      // showJ9Keyboard: 0,
       currentLetter: 1,
       // letters: [
       //   { id: 1, text: 'Y W G', textArray: ['Y', 'W', 'G'] },
@@ -75,12 +76,15 @@ export default {
         { id: 1, text: 'A B C', textArray: ['A', 'B', 'C'] },
         { id: 2, text: 'J K L', textArray: ['J', 'K', 'L'] },
         { id: 3, text: 'S T U', textArray: ['S', 'T', 'U'] },
-        { id: 4, text: 'D E F', textArray: ['D', 'E', 'F'] },
-        { id: 5, text: 'M N O', textArray: ['M', 'N', 'O'] },
-        { id: 6, text: 'V W X', textArray: ['V', 'W', 'X'] },
-        { id: 7, text: 'G H I', textArray: ['G', 'H', 'I'] },
-        { id: 8, text: 'P Q R', textArray: ['P', 'Q', 'R'] },
-        { id: 9, text: 'Y Z .', textArray: ['Y', 'Z', '.'] },
+        { id: 4, text: 'Clear', textArray: ['', '', ''] },
+        { id: 5, text: 'D E F', textArray: ['D', 'E', 'F'] },
+        { id: 6, text: 'M N O', textArray: ['M', 'N', 'O'] },
+        { id: 7, text: 'V W X', textArray: ['V', 'W', 'X'] },
+        { id: 8, text: 'Space', textArray: [' ', ' ', ' '] },
+        { id: 9, text: 'G H I', textArray: ['G', 'H', 'I'] },
+        { id: 10, text: 'P Q R', textArray: ['P', 'Q', 'R'] },
+        { id: 11, text: 'Y Z .', textArray: ['Y', 'Z', '.'] },
+        { id: 12, text: 'Delete', textArray: ['', '', ''] },
       ],
     };
   },
@@ -93,8 +97,6 @@ export default {
     // have a timer function to register when 'Enter' is no longer being pressed
     // after timer function complets, logs the textArray element into input
     // direction arrow completes timer function
-
-
     timerFunc() {
       this.placeholderJ9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
       console.log('letter logged', this.i);
@@ -110,6 +112,61 @@ export default {
         // not being accessed
       }
     },
+    keyDownHandler(keyCode) {
+      clearTimeout(this.timer);
+      switch (keyCode) {
+        case 82:
+          //  r delete
+          this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+          break;
+        case 73:
+          // i clear
+          this.placeholderJ9 = '';
+          break;
+        case 32:
+          // space space
+          this.placeholderJ9 += ' ';
+          break;
+        case 13:
+          // enter
+          this.startTime = new Date().getTime();
+          this.i = (this.i + 1) % 3;
+          console.log(this.i, 'this is i');
+          this.timer = setInterval(this.checkPause);
+          console.log(this.timer);
+          if (this.currentLetter === 12) {
+            this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+          } else if (this.currentLetter === 4) {
+            this.placeholderJ9 = '';
+          }
+          break;
+        case 38:
+          // up
+          if (this.currentLetter !== 1 && this.currentLetter !== 5 && this.currentLetter !== 9) {
+            this.currentLetter--;
+          }
+          break;
+        case 40:
+          // down
+          if (this.currentLetter !== 4 && this.currentLetter !== 8 && this.currentLetter !== 12) {
+            this.currentLetter++;
+          }
+          break;
+        case 39:
+          // right
+          if (this.currentLetter < 9) {
+            this.currentLetter += 4;
+          }
+          break;
+        case 37:
+          // left
+          if (this.currentLetter > 4) {
+            this.currentLetter -= 4;
+          }
+          break;
+        default: break;
+      }
+    },
     J9(event) {
       if (event.keyCode === 82) {
         this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
@@ -120,39 +177,40 @@ export default {
         //  i clear
       }
       if (event.keyCode === 32) {
-        this.placeholderJ9 += '_';
+        this.placeholderJ9 += ' ';
         // space space play/pause
       }
-      clearTimeout(this.timer);
-      if (event.keyCode === 13) {
-        this.startTime = new Date().getTime();
-        this.timer = setTimeout(this.checkPause);
-        this.i = (this.i + 1) % 3;
-        console.log('enter pressed');
-      } else {
-        this.i = -1;
-        if (event.keyCode === 38) {
-          if (this.currentLetter !== 1 && this.currentLetter !== 4 && this.currentLetter !== 7) {
-            this.currentLetter--;
-            // console.log('upping', this.i);
-          }
-        } else if (event.keyCode === 40) {
-          if (this.currentLetter !== 3 && this.currentLetter !== 6 && this.currentLetter !== 9) {
-            this.currentLetter++;
-          }
-          // console.log('downing');
-        } else if (event.keyCode === 39) {
-          // console.log('right');
-          if (this.currentLetter < 7) {
-            this.currentLetter += 3;
-          }
-        } else if (event.keyCode === 37) {
-          // console.log('left');
-          if (this.currentLetter > 3) {
-            this.currentLetter -= 3;
-          }
-        }
-      }
+      // clearTimeout(this.timer);
+      // if (event.keyCode === 13) {
+      //   this.startTime = new Date().getTime();
+      //   this.timer = setInterval(this.checkPause);
+      //   this.i = (this.i + 1) % 3;
+      //   console.log('enter pressed');
+      //   // console.log('enter pressed');
+      // } else {
+      //   this.i = -1;
+      //   if (event.keyCode === 38) {
+      //     if (this.currentLetter !== 1 && this.currentLetter !== 4 && this.currentLetter !== 7) {
+      //       this.currentLetter--;
+      //       // console.log('upping', this.i);
+      //     }
+      //   } else if (event.keyCode === 40) {
+      //     if (this.currentLetter !== 3 && this.currentLetter !== 6 && this.currentLetter !== 9) {
+      //       this.currentLetter++;
+      //     }
+      //     // console.log('downing');
+      //   } else if (event.keyCode === 39) {
+      //     // console.log('right');
+      //     if (this.currentLetter < 7) {
+      //       this.currentLetter += 4;
+      //     }
+      //   } else if (event.keyCode === 37) {
+      //     // console.log('left');
+      //     if (this.currentLetter > 3) {
+      //       this.currentLetter -= 4;
+      //     }
+      //   }
+      // }
       // if (this.$store.state.isKeyboardModal === false) {
     },
   },
