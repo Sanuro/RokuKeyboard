@@ -99,13 +99,13 @@ export default {
   }
 
   .modal-header {
-    border-bottom: 1px solid #eeeeee;
+    // border-bottom: 1px solid #eeeeee;
     color: #4AAE9B;
     justify-content: space-between;
   }
 
   .modal-footer {
-    border-top: 1px solid #eeeeee;
+    // border-top: 1px solid #eeeeee;
     justify-content: space-between;
   }
 

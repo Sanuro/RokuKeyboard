@@ -20,13 +20,15 @@
 
   <div id='legend'>
 
-    <span id='legendInfo'>clear</span>
-    <img id='legendImg' src='/static/image/icon_replay.png'>
-    <span id='legendInfo'>space</span>
-    <img id='legendPlay' src='/static/image/icon_playVideo.png'>
-    <img id='legendPause' src='/static/image/icon_pauseVideo.png'>
-    <span id='legendInfo'>delete</span>
+    <!-- <span id='legendInfo'>clear</span> -->
     <img id='legendImg' src='/static/image/icon_RWx2.png'>
+    <!-- <span id='legendInfo'>space</span> -->
+    <div id='playPause'>
+      <img id='legendImg' src='/static/image/icon_playVideo.png'>
+      <img id='legendImg' src='/static/image/icon_pauseVideo.png'>
+    </div>
+    <!-- <span id='legendInfo'>delete</span> -->
+    <img id='legendImg' src='/static/image/icon_FFx2.png'>
     <!-- <span id='legendInfo'>back</span>
     <img src='static/image/Icon_Back_MH.png'> 
     <span id='legendInfo'>home</span>
@@ -53,7 +55,7 @@ export default {
       // setTimeoutHandle: '',
       timer: 0,
       pause: 0,
-      difTolerance: 400,
+      difTolerance: 350,
       startTime: 0,
       endTime: 0,
       // showJ9Keyboard: 0,
@@ -116,15 +118,15 @@ export default {
       clearTimeout(this.timer);
       switch (keyCode) {
         case 82:
-          //  r delete
+          //  r = delete
           this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
           break;
         case 73:
-          // i clear
+          // i = clear
           this.placeholderJ9 = '';
           break;
         case 32:
-          // space space
+          // space = space
           this.placeholderJ9 += ' ';
           break;
         case 13:
@@ -168,18 +170,18 @@ export default {
       }
     },
     J9(event) {
-      if (event.keyCode === 82) {
-        this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
-        //  r delete
-      }
-      if (event.keyCode === 73) {
-        this.placeholderJ9 = '';
-        //  i clear
-      }
-      if (event.keyCode === 32) {
-        this.placeholderJ9 += ' ';
-        // space space play/pause
-      }
+      // if (event.keyCode === 82) {
+      //   this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+      //   //  r delete
+      // }
+      // if (event.keyCode === 73) {
+      //   this.placeholderJ9 = '';
+      //   //  i clear
+      // }
+      // if (event.keyCode === 32) {
+      //   this.placeholderJ9 += ' ';
+      //   // space space play/pause
+      // }
       // clearTimeout(this.timer);
       // if (event.keyCode === 13) {
       //   this.startTime = new Date().getTime();
@@ -234,7 +236,7 @@ input{
   color: rgba(0,0,0,0.6);
   font-size: 150%;
   padding: 2%;
-  box-shadow: inset 0px 0px 5px black;
+  box-shadow: inset 2px 2px 2px 2px grey;
   box-sizing: border-box;
   border-radius: 5px;
 }
@@ -266,7 +268,7 @@ input{
 #legend{
   display: flex; 
   // margin-top: 10%;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 50%;
   margin: auto;
   align-items: center;
@@ -277,14 +279,18 @@ input{
 
   filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
 }
-#legendPlay{
-  margin-right: 4px; 
-  filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+
+#playPause{
+  display: flex;
 }
-#legendPause{
-  margin-left: -2.5vw;
-  filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
-}
+// #legendPlay{
+//   margin-right: 4px; 
+//   filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+// }
+// #legendPause{
+//   margin-left: -2.5vw;
+//   filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+// }
 #legendInfo{
   font-size: 2vw;
   margin: 0 1% 0 3%;
@@ -300,7 +306,7 @@ img{
   background-color:#7540c4;
   color: #C5C5C5;
   border-radius: 5px;
-  // transform: scale(1.3);
+  // transform: scale(0.9);
 }
 
 
