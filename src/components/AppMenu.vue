@@ -70,14 +70,13 @@ export default {
           // right
           if (this.row < 2) {
             this.row++;
-
             this.currentImageId = this.images[this.row][this.column].id;
             // if (this.row === 2) {
             // }
             console.log(this.row);
             console.log('39');
           } else if (this.row === 2) {
-            this.row++;
+            // this.row++;
             this.$emit('right');
             // this.$store.commit('focusChange', 'ad');
             console.log(this.focused);
@@ -153,16 +152,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#apps{
-  margin: 5px;
-}
+
 .AppMenuContainer{
   display: flex;
-  width: 65vw;
-  // margin-left: 5vw;
+  width: 53vw;
+  // margin-right: 10vw;
 }
 
 #apps{
+  margin: 5px;
   width: 95%;
   margin-left: 5vw;
 }

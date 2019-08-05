@@ -18,7 +18,7 @@
 export default {
   name: 'Ad',
   props: {
-    focused: true,
+    focused: Boolean,
   },
   components: {
     // modal,
@@ -32,7 +32,7 @@ export default {
     return {
       isActive: true,
       showAdBox: true,
-      counter: 0,
+      // counter: 0,
       // isModalVisible: false,
     };
   },
@@ -50,29 +50,28 @@ export default {
         switch (keyCode) {
           case 39:
             //  right
-            if (this.counter < 1) {
-              this.counter++;
-              console.log(this.showAdBox);
-            }
-            if (this.counter > 0) {
-              // this.showAdBox = true;
-              if (this.counter === 1) {
-                this.isActive = true;
-              }
-            }
+            // if (this.counter < 1) {
+              // this.counter++;
+            // }
+            // if (this.counter > 0) {
+            //   // this.showAdBox = true;
+            //   if (this.counter === 1) {
+            //     this.isActive = true;
+            //   }
+            // }
             break;
           case 37:
             //  left
             this.$emit('left');
             // this.$store.commit('focusChange', 'grid');
-            if (this.counter > 0) {
+            // if (this.counter > 0) {
               // if (this.counter === 1) {
               //   this.showAdBox = false;
               // }
-              console.log('pressing left');
-              this.counter--;
-              this.isActive = false;
-            }
+            console.log('pressing left');
+              // this.counter--;
+            this.isActive = false;
+            // }
             break;
           case 13:
             if (this.isActive) {
@@ -160,6 +159,7 @@ export default {
 img{
   /* justify-content: flex-end; */
   width: 25vw;
+  // height: 70vh;
   margin-left: 7vw;
   // margin-right: 3%;
 }

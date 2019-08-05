@@ -77,6 +77,7 @@ body{
 
 #app{
   height: 100vh;
+  padding: 0 5vw 0 5vw;
 }
 
 #main_app{

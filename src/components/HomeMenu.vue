@@ -1,6 +1,6 @@
 <template>
 
-    <div id='homeMenu' v-if='showHomeMenu' class='HomeMenu'>
+    <div id='homeMenu' v-if='focused' class='HomeMenu'>
         <ul v-for='item in items' :key='item.id' :class='{"active-item": focused && currentItem === item.id}'>
             {{item.text}}
         </ul>
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      showHomeMenu: true,
+      // focused: true,
       currentItem: 1,
       items: [
         { id: 1, text: 'Home' },
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     keyDownHandler(keyCode) {
-      // console.log(this.showHomeMenu, 'homemenu');
+      // console.log(this.focused, 'homemenu');
       switch (keyCode) {
         case 38:
           // up
@@ -55,23 +55,30 @@ export default {
           break;
         case 39:
           // right
-          // if (this.showHomeMenu === true) {
-            // this.showHomeMenu++;
-          console.log('this.showHomeMenu', this.showHomeMenu);
+          // if (this.focused === true) {
+            // this.focused++;
+          console.log('this.focused', this.focused);
           // this.$store.commit('focusChange', 'grid');
           this.$emit('right');
           console.log(this.focused);
-          this.showHomeMenu = false;
+          // this.focused = false;
             // console.log('focus changed', this.$store.commit('focusChange', 'grid'));
           // }
           break;
         case 37:
           // left
-          if (this.showHomeMenu === false) {
+          // if (this.focused === false) {
             // this.$emit('left');
             // this.$store.commit('focusChange', 'menu');
             // this.$emit('left');
-            this.showHomeMenu = true;
+            // this.focused = true;
+          // }
+          break;
+        case 13:
+          if (this.currentItem === 6) {
+            // this.focused = false;
+            this.$emit('search');
+            console.log('showing search');
           }
           break;
         default: break;
@@ -116,7 +123,7 @@ export default {
 .HomeMenu{
     min-width: 25vw;
     color: #eee9e9;
-    font-size: 2vw;
+    font-size: 1.5vw;
     margin: 5px;
     text-align: left;
     margin-left: 3vw;
@@ -125,6 +132,7 @@ export default {
 }
 ul{
   border-left: 2vw solid transparent;
+  padding: 2.5% 0 2.5% 0;
 }
 
 .active-item {

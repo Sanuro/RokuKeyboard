@@ -2,17 +2,15 @@
 <div id='container'>
 
   <div id='inputJ99'>
-    <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'Search' >
+    <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'Search'>
   </div>
 
   <div id='J9Keyboard'>
 
     <div id='letters' @keydown='J9'> 
-      <!-- had j9showkeyboard in letters -->
       <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
-        <!-- <li> -->
           {{letter.text}}
-        <!-- </li> -->
+          {{letter.img}}
       </ul>
     </div>
 
@@ -28,11 +26,12 @@
       <img id='legendImg' src='/static/image/icon_pauseVideo.png'>
     </div>
     <!-- <span id='legendInfo'>delete</span> -->
-    <img id='legendImg' src='/static/image/icon_FFx2.png'>
-    <!-- <span id='legendInfo'>back</span>
-    <img src='static/image/Icon_Back_MH.png'> 
-    <span id='legendInfo'>home</span>
-    <img src='static/image/Icon_Home_MH.png'> -->
+    <!-- <img id='legendImg' src='/static/image/icon_FFx2.png'> -->
+    <img id='legendImg' src='/static/image/icon_replay.png'>
+    <!-- <span id='legendInfo'>back</span> -->
+    <!-- <img src='static/image/Icon_Back_MH.png'>  -->
+    <!-- <span id='legendInfo'>home</span> -->
+    <!-- <img src='static/image/Icon_Home_MH.png'> -->
 
   </div>
   
@@ -52,6 +51,7 @@ export default {
     return {
       i: -1,
       placeholderJ9: '',
+      img: Image,
       // setTimeoutHandle: '',
       timer: 0,
       pause: 0,
@@ -318,6 +318,7 @@ img{
   background-color:#7540c4;
   color: #C5C5C5;
   border-radius: 5px;
+  transition: 0.3s;
   // transform: scale(0.9);
 }
 
