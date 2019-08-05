@@ -2,13 +2,19 @@
   <div id='app'>
     <Header id='header'>header</Header>
       <div id='main_app'>
-        <HomeMenu id='homeMenu' ref='menu' :focused="focusTarget==='menu'" @right="focusTarget='grid'">homeMenu</HomeMenu>
-        <div id='appMenuBox'>
-          <AppMenu id='appMenu' :focused="focusTarget==='grid'" @right="focusTarget='ad'" @left="focusTarget='menu'" ref="grid">appMenu</AppMenu>
+        <HomeMenu id='homeMenu' ref='menu' :focused="focusTarget==='menu'" @right="focusTarget='main'" @change="onMenuChange">homeMenu</HomeMenu>
+        <div id="main-view">
+          <template v-if="currentMenu === 'search'">
+            <Search :focused="focusTarget==='main'" @back="focusTarget==='ad'" @left="focusTarget='menu'" ref="main"/>
+          </template>
+          <template v-else>
+            <div id='appMenuBox'>
+              <AppMenu id='appMenu' :focused="focusTarget==='main'" @right="focusTarget='ad'" @left="focusTarget='menu'" ref="main">appMenu</AppMenu>
+            </div>
+            <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='main'" ref="ad">ad
+            </Ad>
+          </template>
         </div>
-        <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" @enter="focusTarget==='dialog', isModalVisible=true" @back=" isModalVisible=false" ref="ad">ad
-        </Ad>
-        <ModalBox v-show='isModalVisible' id='modal' :focused="focusTarget==='dialog'" @back=" isModalVisible=false, focusTarget==='ad'" ref="dialog"></ModalBox>
       </div>
   </div>
 </template>
@@ -18,7 +24,7 @@ import HomeMenu from './components/HomeMenu';
 import AppMenu from './components/AppMenu';
 import Ad from './components/Ad';
 import KeyController from './components/KeyController';
-import ModalBox from '../src/components/ModalBox';
+import Search from '../src/components/SearchView';
 
 // import modal from './components/ModalBox';
 
@@ -33,7 +39,7 @@ export default {
     AppMenu,
     Ad,
     KeyController,
-    ModalBox,
+    Search,
   },
   computed: {
     dialog() {
@@ -42,7 +48,7 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false,
+      currentMenu: 'home',
       focusTarget: null,
     };
   },
@@ -51,11 +57,8 @@ export default {
     this.focusTarget = 'menu';
   },
   methods: {
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
+    onMenuChange(item) {
+      this.currentMenu = item.text.toLowerCase();
     },
     onKeyDown(e) {
       this.$refs[this.focusTarget].keyDownHandler(e.keyCode);
@@ -80,9 +83,11 @@ body{
   padding: 0 5vw 0 5vw;
 }
 
-#main_app{
+#main_app, #main-view{
   display: flex;
   justify-content: stretch;
+  width: 100%;
+  height: 100%;
 }
 
 #appMenuBox{

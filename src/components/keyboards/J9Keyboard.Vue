@@ -163,6 +163,8 @@ export default {
           // left
           if (this.currentLetter > 4) {
             this.currentLetter -= 4;
+          } else {
+            this.$emit('left');
           }
           break;
         // case 66:
@@ -234,7 +236,8 @@ export default {
 #container{
   // position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  // justify-content: center;
 }
 
 input{
