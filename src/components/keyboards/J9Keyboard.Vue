@@ -10,7 +10,6 @@
     <div id='letters' @keydown='J9'> 
       <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
           {{letter.text}}
-          {{letter.img}}
       </ul>
     </div>
 
