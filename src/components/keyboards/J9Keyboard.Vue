@@ -166,6 +166,18 @@ export default {
             this.currentLetter -= 4;
           }
           break;
+        // case 66:
+        //   // b
+        //   // this.isModalVisible = false;
+        //   this.$store.commit('changeModal', false);
+        //   this.$emit('back');
+        //   console.log('keypressed b');
+        //   break;
+        // case 72:
+        //   // h
+        //   // this.isModalVisible = false;
+        //   this.$store.commit('changeModal', false);
+        //   break;
         default: break;
       }
     },

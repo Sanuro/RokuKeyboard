@@ -6,7 +6,7 @@
         <div id='appMenuBox'>
           <AppMenu id='appMenu' :focused="focusTarget==='grid'" @right="focusTarget='ad'" @left="focusTarget='menu'" ref="grid">appMenu</AppMenu>
         </div>
-        <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" @enter="focusTarget==='dialog', isModalVisible=true" ref="ad">ad
+        <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='grid'" @enter="focusTarget==='dialog', isModalVisible=true" @back=" isModalVisible=false" ref="ad">ad
         </Ad>
         <ModalBox v-show='isModalVisible' id='modal' :focused="focusTarget==='dialog'" @back=" isModalVisible=false, focusTarget==='ad'" ref="dialog"></ModalBox>
       </div>
