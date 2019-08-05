@@ -34,6 +34,11 @@ export default {
       ],
     };
   },
+  watch: {
+    currentItem(v) {
+      this.$emit('change', this.items[v - 1]);
+    },
+  },
   methods: {
     keyDownHandler(keyCode) {
       // console.log(this.focused, 'homemenu');
