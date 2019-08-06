@@ -1,14 +1,14 @@
 <template>
 <div id='container'>
 
-  <div id='inputJ99'>
-    <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'Search' >
+  <div id='inputT99'>
+    <input type='text' v-model='placeholderT9' id='inputT9' placeholder= 'Search' >
   </div>
 
-  <div id='J9Keyboard'>
+  <div id='T9Keyboard'>
 
-    <div id='letters' @keydown='J9'> 
-      <!-- had j9showkeyboard in letters -->
+    <div id='letters' @keydown='T9'> 
+      <!-- had T9showkeyboard in letters -->
       <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
         <!-- <li> -->
           {{letter.text}}
@@ -44,54 +44,54 @@
 import KeyboardController from '../KeyController';
 
 export default {
-  name: 'J9Keyboard',
+  name: 'T9Keyboard',
   components: {
     KeyboardController,
   },
   data() {
     return {
       i: -1,
-      placeholderJ9: '',
+      placeholderT9: '',
       // setTimeoutHandle: '',
       timer: 0,
       pause: 0,
       difTolerance: 350,
       startTime: 0,
       endTime: 0,
-      // showJ9Keyboard: 0,
+      // showT9Keyboard: 0,
       currentLetter: 1,
-      // letters: [
-      //   { id: 1, text: 'Y W G', textArray: ['Y', 'W', 'G'] },
-      //   { id: 2, text: 'C M F', textArray: ['C', 'M', 'F'] },
-      //   { id: 3, text: 'J Z Q', textArray: ['J', 'Z', 'Q'] },
-      //   { id: 4, text: 'O I N', textArray: ['O', 'I', 'N'] },
-      //   { id: 5, text: 'E T A', textArray: ['E', 'T', 'A'] },
-      //   { id: 6, text: 'D L U', textArray: ['D', 'L', 'U'] },
-      //   { id: 7, text: 'P B V', textArray: ['P', 'B', 'V'] },
-      //   { id: 8, text: 'S R H', textArray: ['S', 'R', 'H'] },
-      //   { id: 9, text: 'K X .', textArray: ['K', 'X', '.'] },
-        // { id: 10, text: 'Del', textArray: ['Del'] },
-        // { id: 11, text: 'Space', textArray: ['Del'] },
-        // { id: 12, text: 'Clear', textArray: ['Del'] },
-      // ],
       letters: [
-        { id: 1, text: 'A B C', textArray: ['A', 'B', 'C'] },
-        { id: 2, text: 'J K L', textArray: ['J', 'K', 'L'] },
-        { id: 3, text: 'S T U', textArray: ['S', 'T', 'U'] },
-        { id: 4, text: 'Clear', textArray: ['', '', ''] },
-        { id: 5, text: 'D E F', textArray: ['D', 'E', 'F'] },
-        { id: 6, text: 'M N O', textArray: ['M', 'N', 'O'] },
-        { id: 7, text: 'V W X', textArray: ['V', 'W', 'X'] },
-        { id: 8, text: 'Space', textArray: [' ', ' ', ' '] },
-        { id: 9, text: 'G H I', textArray: ['G', 'H', 'I'] },
-        { id: 10, text: 'P Q R', textArray: ['P', 'Q', 'R'] },
-        { id: 11, text: 'Y Z .', textArray: ['Y', 'Z', '.'] },
-        { id: 12, text: 'Delete', textArray: ['', '', ''] },
+        { id: 1, text: 'Y W G', textArray: ['Y', 'W', 'G'] },
+        { id: 2, text: 'C M F', textArray: ['C', 'M', 'F'] },
+        { id: 3, text: 'J Z Q', textArray: ['J', 'Z', 'Q'] },
+        { id: 4, text: 'O I N', textArray: ['O', 'I', 'N'] },
+        { id: 5, text: 'E T A', textArray: ['E', 'T', 'A'] },
+        { id: 6, text: 'D L U', textArray: ['D', 'L', 'U'] },
+        { id: 7, text: 'P B V', textArray: ['P', 'B', 'V'] },
+        { id: 8, text: 'S R H', textArray: ['S', 'R', 'H'] },
+        { id: 9, text: 'K X .', textArray: ['K', 'X', '.'] },
+        { id: 10, text: 'Del', textArray: ['Del'] },
+        { id: 11, text: 'Space', textArray: ['Del'] },
+        { id: 12, text: 'Clear', textArray: ['Del'] },
       ],
+      // letters: [
+      //   { id: 1, text: 'A B C', textArray: ['A', 'B', 'C'] },
+      //   { id: 2, text: 'J K L', textArray: ['J', 'K', 'L'] },
+      //   { id: 3, text: 'S T U', textArray: ['S', 'T', 'U'] },
+      //   { id: 4, text: 'Clear', textArray: ['', '', ''] },
+      //   { id: 5, text: 'D E F', textArray: ['D', 'E', 'F'] },
+      //   { id: 6, text: 'M N O', textArray: ['M', 'N', 'O'] },
+      //   { id: 7, text: 'V W X', textArray: ['V', 'W', 'X'] },
+      //   { id: 8, text: 'Space', textArray: [' ', ' ', ' '] },
+      //   { id: 9, text: 'G H I', textArray: ['G', 'H', 'I'] },
+      //   { id: 10, text: 'P Q R', textArray: ['P', 'Q', 'R'] },
+      //   { id: 11, text: 'Y Z .', textArray: ['Y', 'Z', '.'] },
+      //   { id: 12, text: 'Delete', textArray: ['', '', ''] },
+      // ],
     };
   },
   mounted() {
-    document.addEventListener('keydown', this.J9);
+    document.addEventListener('keydown', this.T9);
   },
   methods: {
     // grab id from textArray
@@ -100,7 +100,7 @@ export default {
     // after timer function complets, logs the textArray element into input
     // direction arrow completes timer function
     timerFunc() {
-      this.placeholderJ9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
+      this.placeholderT9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
       console.log('letter logged', this.i);
       this.i = -1;
       // not being accessed
@@ -119,15 +119,15 @@ export default {
       switch (keyCode) {
         case 82:
           //  r = delete
-          this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+          this.placeholderT9 = this.placeholderT9.slice(0, -1);
           break;
         case 73:
           // i = clear
-          this.placeholderJ9 = '';
+          this.placeholderT9 = '';
           break;
         case 32:
           // space = space
-          this.placeholderJ9 += ' ';
+          this.placeholderT9 += ' ';
           break;
         case 13:
           // enter
@@ -137,9 +137,9 @@ export default {
           this.timer = setInterval(this.checkPause);
           console.log(this.timer);
           if (this.currentLetter === 12) {
-            this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+            this.placeholderT9 = this.placeholderT9.slice(0, -1);
           } else if (this.currentLetter === 4) {
-            this.placeholderJ9 = '';
+            this.placeholderT9 = '';
           }
           break;
         case 38:
@@ -181,17 +181,17 @@ export default {
         default: break;
       }
     },
-    J9(event) {
+    T9(event) {
       // if (event.keyCode === 82) {
-      //   this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+      //   this.placeholderT9 = this.placeholderT9.slice(0, -1);
       //   //  r delete
       // }
       // if (event.keyCode === 73) {
-      //   this.placeholderJ9 = '';
+      //   this.placeholderT9 = '';
       //   //  i clear
       // }
       // if (event.keyCode === 32) {
-      //   this.placeholderJ9 += ' ';
+      //   this.placeholderT9 += ' ';
       //   // space space play/pause
       // }
       // clearTimeout(this.timer);
@@ -253,7 +253,7 @@ input{
   border-radius: 5px;
 }
 
-#J9Keyboard{
+#T9Keyboard{
   padding-top: 3px;
   font-size: 2vw;
   display: flex;

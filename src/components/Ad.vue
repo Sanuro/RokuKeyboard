@@ -1,7 +1,7 @@
 <template>
   <div id="Ad">
 
-   <img v-if='showAdBox' v-bind:class="{'active': focused && isActive}" src='/static/image/Claritin_ad.jpg'/>
+   <img v-if='showAdBox' v-bind:class="{'active': focused}" src='/static/image/Claritin_ad.jpg'/>
   <!-- <div id='adBox'> hello
     </div> -->
 
@@ -30,7 +30,6 @@ export default {
   },
   data() {
     return {
-      isActive: true,
       showAdBox: true,
       // counter: 0,
       // isModalVisible: false,
@@ -44,7 +43,7 @@ export default {
 
   methods: {
     keyDownHandler(keyCode) {
-      console.log(this.$store.state.isKeyboardModal, this.counter);
+      // console.log(this.$store.state.isKeyboardModal, this.counter, 'does ad work', this.showAdBox, this.isActive);
       // console.log(this.showHomeMenu, 'ad');
       if (this.$store.state.isKeyboardModal === false) {
         switch (keyCode) {
@@ -70,16 +69,16 @@ export default {
               // }
             console.log('pressing left');
               // this.counter--;
-            this.isActive = false;
+            // this.isActive = false;
             // }
             break;
           case 13:
-            if (this.isActive) {
+            // if (this.isActive) {
               // this.isModalVisible = true;
-              this.$store.commit('changeModal', true);
-              this.$emit('enter');
+            this.$store.commit('changeModal', true);
+            this.$emit('enter');
               // console.log('switch case in AD');
-            }
+            // }
             break;
           default: break;
         }

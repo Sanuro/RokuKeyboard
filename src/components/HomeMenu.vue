@@ -22,6 +22,7 @@ export default {
     return {
       // focused: true,
       currentItem: 1,
+      myTrack: new Audio('audio/tinyButton.mp3'),
       items: [
         { id: 1, text: 'Home' },
         { id: 2, text: 'My Feed' },
@@ -80,44 +81,14 @@ export default {
           // }
           break;
         case 13:
-          if (this.currentItem === 6) {
+          // if (this.currentItem === 6) {
             // this.focused = false;
-            this.$emit('search');
-            console.log('showing search');
-          }
+          this.$emit('search');
+          console.log('showing search');
+          // }
           break;
         default: break;
       }
-      // if (keyCode === 38) {
-      //   this.currentItem--;
-
-      //   // console.log('upping');
-      //   if (this.currentItem === 0) {
-      //     this.currentItem = 8;
-      //     // console.log('reached end');
-      //   }
-      // } else if (keyCode === 40) {
-      //   this.currentItem++;
-      //   // console.log(this.$store.state.isKeyboardModal);
-      //   // console.log('downing');
-      //   if (this.currentItem === 9) {
-      //     this.currentItem = 1;
-      //   }
-      // } else if (keyCode === 39) {
-      //   // console.log('right');
-      //   this.$emit('right');
-      //   if (this.showHomeMenu < 4) {
-      //     this.showHomeMenu++;
-      //     this.$store.commit('focusChange', 'appMenu');
-      //     // console.log(this.showHomeMenu);
-      //   }
-      // } else if (keyCode === 37) {
-      //   // console.log('left');
-      //   this.$emit('left');
-      //   if (this.showHomeMenu > 0) {
-      //     this.showHomeMenu--;
-      //     // console.log(this.showHomeMenu);
-      //   }
     },
   },
 };

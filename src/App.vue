@@ -3,15 +3,15 @@
     <Header id='header'>header</Header>
       <div id='main_app'>
         <HomeMenu id='homeMenu' ref='menu' :focused="focusTarget==='menu'" @right="focusTarget='main'" @change="onMenuChange">homeMenu</HomeMenu>
-        <div id="main-view">
+        <div id="main-view"> 
           <template v-if="currentMenu === 'search'">
-            <Search :focused="focusTarget==='main'" @back="focusTarget==='ad'" @left="focusTarget='menu'" ref="main"/>
+            <Search :focused="focusTarget==='searchMenu'" @back="focusTarget==='ad'" @left="focusTarget='menu'" ref="main"/>
           </template>
           <template v-else>
             <div id='appMenuBox'>
               <AppMenu id='appMenu' :focused="focusTarget==='main'" @right="focusTarget='ad'" @left="focusTarget='menu'" ref="main">appMenu</AppMenu>
             </div>
-            <Ad id='ad' :focused="focusTarget==='ad'" @left="focusTarget='main'" ref="ad">ad
+            <Ad id='ad' v-if="focusTarget !== 'menu'" :focused="focusTarget==='ad'" @left="focusTarget='main'" ref="ad">ad
             </Ad>
           </template>
         </div>
