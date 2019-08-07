@@ -5,7 +5,7 @@
         <HomeMenu id='homeMenu' ref='menu' :focused="focusTarget==='menu'" @right="focusTarget='main'" @change="onMenuChange">homeMenu</HomeMenu>
         <div id="main-view"> 
           <template v-if="currentMenu === 'search'">
-            <Search :focused="focusTarget==='searchMenu'" @back="focusTarget==='ad'" @left="focusTarget='menu'" ref="main"/>
+            <Search :focused="focusTarget==='main'" @back="focusTarget==='ad'" @left="focusTarget='menu'" ref="main"/>
           </template>
           <template v-else>
             <div id='appMenuBox'>
@@ -71,8 +71,8 @@ export default {
 
 <style>
 body{
-  background-image: url('/static/image/Newman_TRC_Background.jpg');
-  background-color: black;
+  background-image: url('/static/image/Artboard Copy 112.png');
+  background-color: #110A1A;
   background-repeat: no-repeat;
   background-size: auto;
   overflow: hidden;

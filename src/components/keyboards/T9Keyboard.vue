@@ -1,40 +1,40 @@
 <template>
 <div id='container'>
 
-  <div id='inputT99'>
-    <input type='text' v-model='placeholderT9' id='inputT9' placeholder= 'Search' >
-  </div>
+  <!-- <div id='inputT99'> -->
+    <input type='text' v-model='placeholderT9' id='inputT9' placeholder= 'movie, tv, actor'>
+  <!-- </div> -->
 
   <div id='T9Keyboard'>
 
     <div id='letters' @keydown='T9'> 
-      <!-- had T9showkeyboard in letters -->
       <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
-        <!-- <li> -->
           {{letter.text}}
-        <!-- </li> -->
+          <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'>
+          <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
     </div>
 
   </div>
 
-  <div id='legend'>
+  <!-- <div id='legend'> -->
 
     <!-- <span id='legendInfo'>clear</span> -->
-    <img id='legendImg' src='/static/image/icon_RWx2.png'>
+    <!-- <img id='legendImg' src='/static/image/icon_RWx2.png'> -->
     <!-- <span id='legendInfo'>space</span> -->
-    <div id='playPause'>
+    <!-- <div id='playPause'>
       <img id='legendImg' src='/static/image/icon_playVideo.png'>
       <img id='legendImg' src='/static/image/icon_pauseVideo.png'>
-    </div>
+    </div> -->
     <!-- <span id='legendInfo'>delete</span> -->
-    <img id='legendImg' src='/static/image/icon_FFx2.png'>
-    <!-- <span id='legendInfo'>back</span>
-    <img src='static/image/Icon_Back_MH.png'> 
-    <span id='legendInfo'>home</span>
-    <img src='static/image/Icon_Home_MH.png'> -->
+    <!-- <img id='legendImg' src='/static/image/icon_FFx2.png'> -->
+    <!-- <img id='legendImg' src='/static/image/icon_replay.png'> -->
+    <!-- <span id='legendInfo'>back</span> -->
+    <!-- <img src='static/image/Icon_Back_MH.png'>  -->
+    <!-- <span id='legendInfo'>home</span> -->
+    <!-- <img src='static/image/Icon_Home_MH.png'> -->
 
-  </div>
+  <!-- </div> -->
   
 
 </div>
@@ -50,60 +50,40 @@ export default {
   },
   data() {
     return {
+      stillPressingEnter: true,
       i: -1,
       placeholderT9: '',
-      // setTimeoutHandle: '',
+      img: Image,
       timer: 0,
       pause: 0,
       difTolerance: 350,
       startTime: 0,
       endTime: 0,
-      // showT9Keyboard: 0,
       currentLetter: 1,
       letters: [
-        { id: 1, text: 'Y W G', textArray: ['Y', 'W', 'G'] },
-        { id: 2, text: 'C M F', textArray: ['C', 'M', 'F'] },
-        { id: 3, text: 'J Z Q', textArray: ['J', 'Z', 'Q'] },
-        { id: 4, text: 'O I N', textArray: ['O', 'I', 'N'] },
-        { id: 5, text: 'E T A', textArray: ['E', 'T', 'A'] },
-        { id: 6, text: 'D L U', textArray: ['D', 'L', 'U'] },
-        { id: 7, text: 'P B V', textArray: ['P', 'B', 'V'] },
-        { id: 8, text: 'S R H', textArray: ['S', 'R', 'H'] },
-        { id: 9, text: 'K X .', textArray: ['K', 'X', '.'] },
-        { id: 10, text: 'Del', textArray: ['Del'] },
-        { id: 11, text: 'Space', textArray: ['Del'] },
-        { id: 12, text: 'Clear', textArray: ['Del'] },
+        { id: 1, text: 'a b c', textArray: ['a', 'b', 'c'] },
+        { id: 2, text: 'j k l', textArray: ['j', 'k', 'l'] },
+        { id: 3, text: 's t u', textArray: ['s', 't', 'u'] },
+        { id: 4, text: 'Clear', textArray: ['', '', ''], src: '/static/image/icon_RWx2.png' },
+        { id: 5, text: 'd e f', textArray: ['d', 'e', 'f'] },
+        { id: 6, text: 'm n o', textArray: ['m', 'n', 'o'] },
+        { id: 7, text: 'v w x', textArray: ['v', 'w', 'x'] },
+        { id: 8, text: 'Space', textArray: [' ', ' ', ' '], src: '/static/image/icon_playVideo.png' },
+        { id: 9, text: 'g h i', textArray: ['g', 'h', 'i'] },
+        { id: 10, text: 'p q r', textArray: ['p', 'q', 'r'] },
+        { id: 11, text: 'y z .', textArray: ['y', 'z', '.'] },
+        { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_replay.png' },
       ],
-      // letters: [
-      //   { id: 1, text: 'A B C', textArray: ['A', 'B', 'C'] },
-      //   { id: 2, text: 'J K L', textArray: ['J', 'K', 'L'] },
-      //   { id: 3, text: 'S T U', textArray: ['S', 'T', 'U'] },
-      //   { id: 4, text: 'Clear', textArray: ['', '', ''] },
-      //   { id: 5, text: 'D E F', textArray: ['D', 'E', 'F'] },
-      //   { id: 6, text: 'M N O', textArray: ['M', 'N', 'O'] },
-      //   { id: 7, text: 'V W X', textArray: ['V', 'W', 'X'] },
-      //   { id: 8, text: 'Space', textArray: [' ', ' ', ' '] },
-      //   { id: 9, text: 'G H I', textArray: ['G', 'H', 'I'] },
-      //   { id: 10, text: 'P Q R', textArray: ['P', 'Q', 'R'] },
-      //   { id: 11, text: 'Y Z .', textArray: ['Y', 'Z', '.'] },
-      //   { id: 12, text: 'Delete', textArray: ['', '', ''] },
-      // ],
     };
   },
   mounted() {
     document.addEventListener('keydown', this.T9);
   },
   methods: {
-    // grab id from textArray
-    // when pressing Enter cycle through the textArray elements
-    // have a timer function to register when 'Enter' is no longer being pressed
-    // after timer function complets, logs the textArray element into input
-    // direction arrow completes timer function
     timerFunc() {
-      this.placeholderT9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
+      this.stillPressingEnter = false;
       console.log('letter logged', this.i);
       this.i = -1;
-      // not being accessed
     },
     checkPause() {
       this.endTime = new Date().getTime();
@@ -111,7 +91,6 @@ export default {
         clearTimeout(this.timer);
         this.timerFunc();
         console.log('clearing timer');
-        // not being accessed
       }
     },
     keyDownHandler(keyCode) {
@@ -131,8 +110,14 @@ export default {
           break;
         case 13:
           // enter
-          this.startTime = new Date().getTime();
+          if (this.stillPressingEnter) {
+            // delete the last character
+            this.placeholderT9 = this.placeholderT9.slice(0, -1);
+          }
+          this.stillPressingEnter = true;
           this.i = (this.i + 1) % 3;
+          this.placeholderT9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
+          this.startTime = new Date().getTime();
           console.log(this.i, 'this is i');
           this.timer = setInterval(this.checkPause);
           console.log(this.timer);
@@ -164,68 +149,14 @@ export default {
           // left
           if (this.currentLetter > 4) {
             this.currentLetter -= 4;
+          } else {
+            this.$emit('left');
           }
           break;
-        // case 66:
-        //   // b
-        //   // this.isModalVisible = false;
-        //   this.$store.commit('changeModal', false);
-        //   this.$emit('back');
-        //   console.log('keypressed b');
-        //   break;
-        // case 72:
-        //   // h
-        //   // this.isModalVisible = false;
-        //   this.$store.commit('changeModal', false);
-        //   break;
         default: break;
       }
     },
     T9(event) {
-      // if (event.keyCode === 82) {
-      //   this.placeholderT9 = this.placeholderT9.slice(0, -1);
-      //   //  r delete
-      // }
-      // if (event.keyCode === 73) {
-      //   this.placeholderT9 = '';
-      //   //  i clear
-      // }
-      // if (event.keyCode === 32) {
-      //   this.placeholderT9 += ' ';
-      //   // space space play/pause
-      // }
-      // clearTimeout(this.timer);
-      // if (event.keyCode === 13) {
-      //   this.startTime = new Date().getTime();
-      //   this.timer = setInterval(this.checkPause);
-      //   this.i = (this.i + 1) % 3;
-      //   console.log('enter pressed');
-      //   // console.log('enter pressed');
-      // } else {
-      //   this.i = -1;
-      //   if (event.keyCode === 38) {
-      //     if (this.currentLetter !== 1 && this.currentLetter !== 4 && this.currentLetter !== 7) {
-      //       this.currentLetter--;
-      //       // console.log('upping', this.i);
-      //     }
-      //   } else if (event.keyCode === 40) {
-      //     if (this.currentLetter !== 3 && this.currentLetter !== 6 && this.currentLetter !== 9) {
-      //       this.currentLetter++;
-      //     }
-      //     // console.log('downing');
-      //   } else if (event.keyCode === 39) {
-      //     // console.log('right');
-      //     if (this.currentLetter < 7) {
-      //       this.currentLetter += 4;
-      //     }
-      //   } else if (event.keyCode === 37) {
-      //     // console.log('left');
-      //     if (this.currentLetter > 3) {
-      //       this.currentLetter -= 4;
-      //     }
-      //   }
-      // }
-      // if (this.$store.state.isKeyboardModal === false) {
     },
   },
 };
@@ -233,93 +164,91 @@ export default {
 <style lang="scss" scoped>
 
 #container{
-  // position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  // align-self: left;
+  margin-left: 4.85vw;
 }
 
 input{
-  // justify-content: space-between;
-  width: 50%;
-  // border: 2px solid #6C3B97;
-  background-color: #efefef;;
-  opacity: 50%;
+  width: 65%;
+  background-color: rgba(255, 255, 255, 0.4);
+  // opacity: 50%;
   border-radius: 5px;
-  color: rgba(0,0,0,0.6);
-  font-size: 150%;
-  padding: 2%;
-  box-shadow: inset 2px 2px 2px 2px grey;
+  color: white;
+  font-size: 200%;
+  padding: 2% 0% 2% 6.5%;
+  box-shadow: inset 2px 2px 0px 0px black;
   box-sizing: border-box;
   border-radius: 5px;
+  text-transform: lowercase;
+  // font-family: GothamBookLat;
+  // placeholder{
+  //   color: white;
+  // }
 }
+  ::placeholder{
+    color: white;
+    opacity: 0.6;
+  }
 
 #T9Keyboard{
   padding-top: 3px;
-  font-size: 2vw;
+  font-size: 200%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #letters{
-  width: 50%;
-  height: 50%;
-  background-color: #efefef;
-  border-radius: 5px;
+  width: 65%;
+  // height: 60%;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #efefef;
+  border-radius: 10px;
   column-count: 3;
   column-gap: 0px;
+  font-weight: bold;
+  margin-top: 2vh;
+  // overflow: hidden;
 }
 
 #listLetter{
   padding: 15% 0% 15% 0%;
-  // padding: 10% 5% 10% 5%;
-  // margin: 10%;
-  border-radius: 5px;
-  outline: 3px solid #E5E5E5;
-}
-
-#legend{
-  display: flex; 
-  // margin-top: 10%;
-  justify-content: space-around;
-  width: 50%;
-  margin: auto;
-  align-items: center;
+  justify-content: space-between !important;
+  // border-radius: 5px;
+  // outline: 3px solid #E5E5E5;
+  outline: rgba(255, 255, 255, 1);
+  // border: 0.5px solid black;
+  // border: 5px solid black;
+  box-sizing: border-box;
+  border: 0.5px solid black;
 }
 
 #legendImg{
-  height: 3%;
-
-  filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
-}
-
-#playPause{
-  display: flex;
-}
-// #legendPlay{
-//   margin-right: 4px; 
-//   filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
-// }
-// #legendPause{
-//   margin-left: -2.5vw;
-//   filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
-// }
-#legendInfo{
-  font-size: 2vw;
-  margin: 0 1% 0 3%;
-}
-
-img{
-  padding: 1%;
-  border-radius: 5px;
+  height: 1.5vh;
+  opacity: 0.8;
+  // margin-top: 5px !important; 
+  // width: 1.5vw;
+  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+  // background-color: rgba(255, 255, 255, 1);
 }
 
 .active-letter {
   align-content: space-between;
-  background-color:#7540c4;
-  color: #C5C5C5;
-  border-radius: 5px;
-  // transform: scale(0.9);
+  background-color:#efefef;
+  color: black;
+  // border-radius: 10px;
+  // box-sizing: border-box;
+  // border: 0.5px solid black;
+  // border: 1px solid black;
+  // border-radius: 5px;
+  transition: 0.3s;
+  // box-shadow: 0 0 5px black;
+  // transform: scale(1.1);
+  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+  #legendImg{
+    filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+  }
 }
-
 
 </style>

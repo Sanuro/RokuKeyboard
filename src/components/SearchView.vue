@@ -1,28 +1,30 @@
 <template>
 
   <div id="search">
-    <component class="vkb" ref='J9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/> 
-    <component class="vkb1" ref='T9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/>
-    <component class="vkb2" ref='ABCKeyboardRef' :is="keyboardMode" @ABC="$emit('ABC')" @left="$emit('left')"/> 
+    <keep-alive>
+      <component class="vkb" ref='J9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/> 
+      <!-- <component class="vkb1" ref='T9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/>
+      <component class="vkb2" ref='ABCKeyboardRef' :is="keyboardMode" @ABC="$emit('ABC')" @left="$emit('left')"/>  -->
+    </keep-alive>
   </div>
 
 </template>
 
 <script>
-import J9Keyboard from './keyboards/J9Keyboard';
-import T9Keyboard from './keyboards/T9Keyboard';
+import J9 from './keyboards/J9Keyboard';
+import T9 from './keyboards/T9Keyboard';
 import ABC from './keyboards/ABCKeyboard';
 
 export default {
   components: {
-    J9Keyboard,
-    T9Keyboard,
+    J9,
+    T9,
     ABC,
   },
   data() {
     return {
       isActive: false,
-      keyboardMode: 'J9Keyboard',
+      keyboardMode: 'ABC',
     };
   },
   methods: {
@@ -32,16 +34,16 @@ export default {
       switch (keyCode) {
         case 49:
           // 1
-          this.$emit('ABC');
+          // this.$emit('ABC');
           this.keyboardMode = 'ABC';
           break;
         case 50:
           // 2
-          this.keyboardMode = 'T9Keyboard';
+          this.keyboardMode = 'T9';
           break;
         case 51:
           // 3
-          this.keyboardMode = 'J9Keyboard';
+          this.keyboardMode = 'J9';
           break;
         default: break;
       }

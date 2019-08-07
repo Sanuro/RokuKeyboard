@@ -99,7 +99,8 @@ export default {
 .HomeMenu{
     min-width: 25vw;
     color: #eee9e9;
-    font-size: 1.5vw;
+    font-size: 1.8vw;
+    font-weight: bold;
     margin: 5px;
     text-align: left;
     margin-left: 3vw;

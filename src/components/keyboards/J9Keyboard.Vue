@@ -1,15 +1,15 @@
 <template>
 <div id='container'>
 
-  <div id='inputJ99'>
-    <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'Search'>
-  </div>
+  <!-- <div id='inputT99'> -->
+    <input type='text' v-model='placeholderT9' id='inputT9' placeholder= 'movie, tv, actor'>
+  <!-- </div> -->
 
-  <div id='J9Keyboard'>
+  <div id='T9Keyboard'>
 
-    <div id='letters' @keydown='J9'> 
+    <div id='letters' @keydown='T9'> 
       <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
-          {{letter.text}}<br>
+          {{letter.text}}
           <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'>
           <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
@@ -17,24 +17,24 @@
 
   </div>
 
-  <div id='legend'>
+  <!-- <div id='legend'> -->
 
     <!-- <span id='legendInfo'>clear</span> -->
-    <img id='legendImg' src='/static/image/icon_RWx2.png'>
+    <!-- <img id='legendImg' src='/static/image/icon_RWx2.png'> -->
     <!-- <span id='legendInfo'>space</span> -->
-    <div id='playPause'>
+    <!-- <div id='playPause'>
       <img id='legendImg' src='/static/image/icon_playVideo.png'>
       <img id='legendImg' src='/static/image/icon_pauseVideo.png'>
-    </div>
+    </div> -->
     <!-- <span id='legendInfo'>delete</span> -->
     <!-- <img id='legendImg' src='/static/image/icon_FFx2.png'> -->
-    <img id='legendImg' src='/static/image/icon_replay.png'>
+    <!-- <img id='legendImg' src='/static/image/icon_replay.png'> -->
     <!-- <span id='legendInfo'>back</span> -->
     <!-- <img src='static/image/Icon_Back_MH.png'>  -->
     <!-- <span id='legendInfo'>home</span> -->
     <!-- <img src='static/image/Icon_Home_MH.png'> -->
 
-  </div>
+  <!-- </div> -->
   
 
 </div>
@@ -44,14 +44,15 @@
 import KeyboardController from '../KeyController';
 
 export default {
-  name: 'J9Keyboard',
+  name: 'T9Keyboard',
   components: {
     KeyboardController,
   },
   data() {
     return {
+      stillPressingEnter: true,
       i: -1,
-      placeholderJ9: '',
+      placeholderT9: '',
       img: Image,
       timer: 0,
       pause: 0,
@@ -60,27 +61,27 @@ export default {
       endTime: 0,
       currentLetter: 1,
       letters: [
-        { id: 1, text: 'A B C', textArray: ['A', 'B', 'C'] },
-        { id: 2, text: 'J K L', textArray: ['J', 'K', 'L'] },
-        { id: 3, text: 'S T U', textArray: ['S', 'T', 'U'] },
+        { id: 1, text: 'y w g', textArray: ['y', 'w', 'g'] },
+        { id: 2, text: 'c m f', textArray: ['c', 'm', 'f'] },
+        { id: 3, text: 'j z q', textArray: ['j', 'z', 'q'] },
         { id: 4, text: 'Clear', textArray: ['', '', ''], src: '/static/image/icon_RWx2.png' },
-        { id: 5, text: 'D E F', textArray: ['D', 'E', 'F'] },
-        { id: 6, text: 'M N O', textArray: ['M', 'N', 'O'] },
-        { id: 7, text: 'V W X', textArray: ['V', 'W', 'X'] },
+        { id: 5, text: 'o i n', textArray: ['o', 'i', 'n'] },
+        { id: 6, text: 'e t a', textArray: ['e', 't', 'a'] },
+        { id: 7, text: 'd l u', textArray: ['d', 'l', 'u'] },
         { id: 8, text: 'Space', textArray: [' ', ' ', ' '], src: '/static/image/icon_playVideo.png' },
-        { id: 9, text: 'G H I', textArray: ['G', 'H', 'I'] },
-        { id: 10, text: 'P Q R', textArray: ['P', 'Q', 'R'] },
-        { id: 11, text: 'Y Z .', textArray: ['Y', 'Z', '.'] },
+        { id: 9, text: 'p b v', textArray: ['p', 'b', 'v'] },
+        { id: 10, text: 's r h', textArray: ['s', 'r', 'h'] },
+        { id: 11, text: 'k x .', textArray: ['k', 'x', '.'] },
         { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_replay.png' },
       ],
     };
   },
   mounted() {
-    document.addEventListener('keydown', this.J9);
+    document.addEventListener('keydown', this.T9);
   },
   methods: {
     timerFunc() {
-      this.placeholderJ9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
+      this.stillPressingEnter = false;
       console.log('letter logged', this.i);
       this.i = -1;
     },
@@ -97,27 +98,33 @@ export default {
       switch (keyCode) {
         case 82:
           //  r = delete
-          this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+          this.placeholderT9 = this.placeholderT9.slice(0, -1);
           break;
         case 73:
           // i = clear
-          this.placeholderJ9 = '';
+          this.placeholderT9 = '';
           break;
         case 32:
           // space = space
-          this.placeholderJ9 += ' ';
+          this.placeholderT9 += ' ';
           break;
         case 13:
           // enter
-          this.startTime = new Date().getTime();
+          if (this.stillPressingEnter) {
+            // delete the last character
+            this.placeholderT9 = this.placeholderT9.slice(0, -1);
+          }
+          this.stillPressingEnter = true;
           this.i = (this.i + 1) % 3;
+          this.placeholderT9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
+          this.startTime = new Date().getTime();
           console.log(this.i, 'this is i');
           this.timer = setInterval(this.checkPause);
           console.log(this.timer);
           if (this.currentLetter === 12) {
-            this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
+            this.placeholderT9 = this.placeholderT9.slice(0, -1);
           } else if (this.currentLetter === 4) {
-            this.placeholderJ9 = '';
+            this.placeholderT9 = '';
           }
           break;
         case 38:
@@ -149,7 +156,7 @@ export default {
         default: break;
       }
     },
-    J9(event) {
+    T9(event) {
     },
   },
 };
@@ -159,76 +166,89 @@ export default {
 #container{
   display: flex;
   flex-direction: column;
+  // align-self: left;
+  margin-left: 4.85vw;
 }
 
 input{
-  width: 50%;
-  background-color: #efefef;;
-  opacity: 50%;
+  width: 65%;
+  background-color: rgba(255, 255, 255, 0.4);
+  // opacity: 50%;
   border-radius: 5px;
-  color: rgba(0,0,0,0.6);
-  font-size: 150%;
-  padding: 2%;
-  box-shadow: inset 2px 2px 2px 2px grey;
+  color: white;
+  font-size: 200%;
+  padding: 2% 0% 2% 6.5%;
+  box-shadow: inset 2px 2px 0px 0px black;
   box-sizing: border-box;
   border-radius: 5px;
+  text-transform: lowercase;
+  // font-family: GothamBookLat;
+  // placeholder{
+  //   color: white;
+  // }
 }
+  ::placeholder{
+    color: white;
+    opacity: 0.6;
+  }
 
-#J9Keyboard{
+#T9Keyboard{
   padding-top: 3px;
-  font-size: 2vw;
+  font-size: 200%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #letters{
-  width: 50%;
-  height: 50%;
-  background-color: #efefef;
-  border-radius: 5px;
+  width: 65%;
+  // height: 60%;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #efefef;
+  border-radius: 10px;
   column-count: 3;
   column-gap: 0px;
+  font-weight: bold;
+  margin-top: 2vh;
+  // overflow: hidden;
 }
 
 #listLetter{
   padding: 15% 0% 15% 0%;
-  border-radius: 5px;
-  outline: 3px solid #E5E5E5;
-}
-
-#legend{
-  display: flex; 
-  justify-content: space-around;
-  width: 25%;
-  margin: auto;
-  align-items: center;
+  justify-content: space-between !important;
+  // border-radius: 5px;
+  // outline: 3px solid #E5E5E5;
+  outline: rgba(255, 255, 255, 1);
+  // border: 0.5px solid black;
+  // border: 5px solid black;
+  box-sizing: border-box;
+  border: 0.5px solid black;
 }
 
 #legendImg{
   height: 1.5vh;
-  filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
-}
-
-#playPause{
-  display: flex;
-}
-
-#legendInfo{
-  font-size: 2vw;
-  margin: 0 1% 0 3%;
-}
-
-img{
-  padding: 1%;
-  border-radius: 5px;
+  opacity: 0.8;
+  // margin-top: 5px !important; 
+  // width: 1.5vw;
+  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+  // background-color: rgba(255, 255, 255, 1);
 }
 
 .active-letter {
   align-content: space-between;
-  background-color:#7540c4;
-  color: #C5C5C5;
-  border-radius: 5px;
+  background-color:#efefef;
+  color: black;
+  // border-radius: 10px;
+  // box-sizing: border-box;
+  // border: 0.5px solid black;
+  // border: 1px solid black;
+  // border-radius: 5px;
   transition: 0.3s;
+  // box-shadow: 0 0 5px black;
+  // transform: scale(1.1);
+  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+  #legendImg{
+    filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+  }
 }
 
 </style>
