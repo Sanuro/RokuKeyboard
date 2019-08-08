@@ -1,5 +1,5 @@
 <template>
-<div id='container'>
+<div id='container' >
 
   <!-- <div id='inputT99'> -->
     <input type='text' v-model='placeholderT9' id='inputT9' placeholder= 'movie, tv, actor'>
@@ -8,34 +8,20 @@
   <div id='T9Keyboard'>
 
     <div id='letters' @keydown='T9'> 
-      <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
-          {{letter.text}}
+      <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": focused && currentLetter === letter.id}'>
+          <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 0 && currentLetter === letter.id}'>{{letter.text[0]}}</span>
+          <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 1 && currentLetter === letter.id}'>{{letter.text[2]}}</span>
+          <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
+
+          <span v-if='letter.id % 4 === 0'>{{letter.text}}</span>
+        
+          <!-- {{letter.text}}<br> -->
           <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'>
           <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
     </div>
 
-  </div>
-
-  <!-- <div id='legend'> -->
-
-    <!-- <span id='legendInfo'>clear</span> -->
-    <!-- <img id='legendImg' src='/static/image/icon_RWx2.png'> -->
-    <!-- <span id='legendInfo'>space</span> -->
-    <!-- <div id='playPause'>
-      <img id='legendImg' src='/static/image/icon_playVideo.png'>
-      <img id='legendImg' src='/static/image/icon_pauseVideo.png'>
-    </div> -->
-    <!-- <span id='legendInfo'>delete</span> -->
-    <!-- <img id='legendImg' src='/static/image/icon_FFx2.png'> -->
-    <!-- <img id='legendImg' src='/static/image/icon_replay.png'> -->
-    <!-- <span id='legendInfo'>back</span> -->
-    <!-- <img src='static/image/Icon_Back_MH.png'>  -->
-    <!-- <span id='legendInfo'>home</span> -->
-    <!-- <img src='static/image/Icon_Home_MH.png'> -->
-
-  <!-- </div> -->
-  
+  </div> 
 
 </div>
 </template>
@@ -47,6 +33,9 @@ export default {
   name: 'T9Keyboard',
   components: {
     KeyboardController,
+  },
+  props: {
+    focused: Boolean,
   },
   data() {
     return {
@@ -213,7 +202,7 @@ input{
 }
 
 #listLetter{
-  padding: 15% 0% 15% 0%;
+  padding: 30% 0% 30% 0%;
   justify-content: space-between !important;
   // border-radius: 5px;
   // outline: 3px solid #E5E5E5;
@@ -249,6 +238,11 @@ input{
   #legendImg{
     filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
   }
+}
+
+.make-bold {
+  font-weight: bolder;
+  text-decoration: underline;
 }
 
 </style>

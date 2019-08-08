@@ -20,7 +20,6 @@ export default {
   },
   data() {
     return {
-      // focused: true,
       currentItem: 1,
       myTrack: new Audio('audio/tinyButton.mp3'),
       items: [
@@ -66,6 +65,7 @@ export default {
           console.log('this.focused', this.focused);
           // this.$store.commit('focusChange', 'grid');
           this.$emit('right');
+          this.$emit('searchRight');
           console.log(this.focused);
           // this.focused = false;
             // console.log('focus changed', this.$store.commit('focusChange', 'grid'));

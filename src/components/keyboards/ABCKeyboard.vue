@@ -163,6 +163,7 @@ export default {
           console.log(this.i, 'this is i');
           this.timer = setInterval(this.checkPause);
           console.log(this.timer);
+          // document.getElementsByClassName(this.currentLetter).className = 'indent';
           if (this.currentLetter === 35 || this.currentLetter === 42) {
             this.placeholderJ9 = this.placeholderJ9.slice(0, -1);
           } else if (this.currentLetter === 7 || this.currentLetter === 14) {
@@ -295,18 +296,17 @@ input{
   align-content: space-between;
   background-color:#efefef;
   color: black;
-  // border-radius: 10px;
-  // box-sizing: border-box;
-  // border: 0.5px solid black;
-  // border: 1px solid black;
-  // border-radius: 5px;
   transition: 0.3s;
-  // box-shadow: 0 0 5px black;
-  // transform: scale(1.1);
-  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
   #legendImg{
     filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
   }
+  .indent{
+    transition: 0.4s;
+    transform: scale(0.5) !important;
+  }
+  
 }
+
+
 
 </style>

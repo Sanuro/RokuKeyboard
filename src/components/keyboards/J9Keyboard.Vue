@@ -9,7 +9,7 @@
 
     <div id='letters' @keydown='T9'> 
       <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
-          {{letter.text}}
+          {{letter.text}}<br>
           <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'>
           <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>

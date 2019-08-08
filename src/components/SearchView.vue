@@ -3,8 +3,6 @@
   <div id="search">
     <keep-alive>
       <component class="vkb" ref='J9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/> 
-      <!-- <component class="vkb1" ref='T9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/>
-      <component class="vkb2" ref='ABCKeyboardRef' :is="keyboardMode" @ABC="$emit('ABC')" @left="$emit('left')"/>  -->
     </keep-alive>
   </div>
 
@@ -24,7 +22,7 @@ export default {
   data() {
     return {
       isActive: false,
-      keyboardMode: 'ABC',
+      keyboardMode: 'T9',
     };
   },
   methods: {
