@@ -1,24 +1,14 @@
 <template>
-<div id='container'>
-
-  <!-- <div id='inputJ99'> -->
-    <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'movie, tv, actor'>
-  <!-- </div> -->
-
-  <div id='J9Keyboard'>
-
-    <div id='letters'> 
+<div id='abc-container'>
+  <input type='text' v-model='placeholderJ9' id='input-abc' placeholder= 'movie, tv, actor'>
+  <div id='abc-keyboard'>
+    <div class='letters'> 
       <div class='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
-          <div id='alphaNumButton' v-if="letter.id < 37">{{letter.text}}</div>
-          <div id='bottomButton' v-if="letter.id >= 37">{{letter.text}}</div>
-          <img v-if='letter.src' id='legendImg' v-bind:src='letter.src'>
-          <!-- <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'> -->
+          <div class='alphaNumButton' v-if="letter.text">{{letter.text}}</div>
+          <img v-if='letter.src' class='legendImg' v-bind:src='letter.src'>
       </div>
     </div>
-
-    
   </div>
-
 </div>
 </template>
 
@@ -194,7 +184,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-#container{
+#abc-container{
   display: flex;
   flex-direction: column;
   // align-self: left;
@@ -204,13 +194,13 @@ export default {
   margin-right: 17vw;
 }
 
-input{
+input#input-abc{
   width: 100%;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
   color: white;
   font-size: 2vw;
-  padding: 2% 0% 2% 4%;
+  padding: 2% 0% 2% 6.5%;
   box-shadow: inset 2px 2px 0px 0px black;
   box-sizing: border-box;
   border-radius: 5px;
@@ -221,7 +211,7 @@ input{
     opacity: 0.6;
   }
 
-#J9Keyboard{
+#abc-keyboard{
   width: 100%;
   padding-top: 3px;
   font-size: 2vw;
@@ -229,7 +219,7 @@ input{
   justify-content: space-between;
 }
 
-#letters{
+.letters{
   width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
   color: #efefef;
@@ -270,7 +260,7 @@ input{
   }
 }
 
-#legendImg{
+.legendImg{
   width: 2.5vw;
   // height: 1.5vh;
   opacity: 0.8;
@@ -281,7 +271,7 @@ input{
   background-color:#efefef;
   color: black;
   transition: 0.3s;
-  #legendImg{
+  .legendImg{
     filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
   }
   .indent{

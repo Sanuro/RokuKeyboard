@@ -1,26 +1,18 @@
 <template>
-<div id='container' >
-
-  <!-- <div id='inputJ99'> -->
-    <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'movie, tv, actor'>
-  <!-- </div> -->
-
+<div id='j9-container' >
+  <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'movie, tv, actor'>
   <div id='J9Keyboard'>
-
-    <div id='letters' @keydown='J9'> 
-      <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
+    <div class='letters' @keydown='J9'> 
+      <ul class='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 0 && currentLetter === letter.id}'>{{letter.text[0]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 1 && currentLetter === letter.id}'>{{letter.text[2]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
-
           <span v-if='letter.id % 4 === 0'>{{letter.text}}</span><br>
           <img v-if='letter.src' class='legendImg' :class="{rewind: letter.id === 12}" v-bind:src='letter.src'>
           <img v-if='letter.id == 8' class='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
     </div>
-
   </div> 
-
 </div>
 </template>
 
@@ -150,7 +142,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-#container{
+#j9-container{
   display: flex;
   flex-direction: column;
   margin-left: 4.85vw;
@@ -158,7 +150,7 @@ export default {
   margin-right: 17vw;
 }
 
-input{
+input#inputJ9{
   width: 100%;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
@@ -181,7 +173,7 @@ input{
   justify-content: space-between;
 }
 
-#letters{
+.letters{
   width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
   color: #efefef;
@@ -192,7 +184,7 @@ input{
   margin-top: 2vh;
 }
 
-#listLetter{
+.listLetter{
   padding: 30% 5% 30% 5%;
   text-align: center;
   // justify-content: space-between !important;

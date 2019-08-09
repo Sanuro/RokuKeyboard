@@ -1,14 +1,9 @@
 <template>
-<div id='container' >
-
-  <!-- <div id='inputT99'> -->
-    <input type='text' v-model='placeholderT9' id='inputT9' placeholder= 'movie, tv, actor'>
-  <!-- </div> -->
-
+<div id='t9-container' >
+  <input type='text' v-model='placeholderT9' id='inputT9' placeholder= 'movie, tv, actor'>
   <div id='T9Keyboard'>
-
-    <div id='letters' @keydown='T9'> 
-      <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter":  currentLetter === letter.id}'>
+    <div class='letters' @keydown='T9'> 
+      <ul class='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter":  currentLetter === letter.id}'>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 0 && currentLetter === letter.id}'>{{letter.text[0]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 1 && currentLetter === letter.id}'>{{letter.text[2]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
@@ -18,9 +13,7 @@
           <img v-if='letter.id == 8' class='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
     </div>
-
   </div> 
-
 </div>
 </template>
 
@@ -160,7 +153,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-#container{
+#t9-container{
   display: flex;
   flex-direction: column;
   margin-left: 4.85vw;
@@ -168,7 +161,7 @@ export default {
   margin-right: 17vw;
 }
 
-input{
+input#inputT9{
   width: 100%;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
@@ -191,7 +184,7 @@ input{
   justify-content: space-between;
 }
 
-#letters{
+.letters{
   width: 100%;
   // height: 60%;
   background-color: rgba(255, 255, 255, 0.2);
@@ -203,7 +196,7 @@ input{
   margin-top: 2vh;
 }
 
-#listLetter{
+.listLetter{
   padding: 30% 5%;
   text-align: center;
   // justify-content: space-between !important;
