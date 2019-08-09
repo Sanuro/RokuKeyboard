@@ -99,47 +99,6 @@ export default {
         default: break;
       }
     },
-    // showModal(event) {
-    //   if (event.keyCode === 13 && this.isActive) {
-    //     this.isModalVisible = true;
-    //     // console.log('enter');
-    //     this.$store.commit('changeModal', true);
-    //   }
-    // },
-    // closeModal(event) {
-    //   if (event.keyCode === 66 || event.keyCode === 72) {
-    //     this.isModalVisible = false;
-    //     // console.log('b');
-    //     this.$store.commit('changeModal', false);
-    //     // console.log('b being pressed');
-    //   }
-    // },
-    // showAd(event) {
-    //   if (this.$store.state.isKeyboardModal === false) {
-    //     if (event.keyCode === 39) {
-    //       // console.log('right');
-    //       if (this.counter < 4) {
-    //         this.counter++;
-    //         // console.log(this.counter);
-    //       }
-    //       if (this.counter > 0) {
-    //         this.showAdBox = true;
-    //         if (this.counter === 4) {
-    //           this.isActive = true;
-    //         }
-    //       }
-    //     } else if (event.keyCode === 37) {
-    //       // console.log('left');
-    //       if (this.counter > 0) {
-    //         if (this.counter === 1) {
-    //           this.showAdBox = false;
-    //         }
-    //         this.counter--;
-    //         this.isActive = false;
-    //       }
-    //     }
-    //   }
-    // },
   },
 };
 </script>
@@ -156,10 +115,7 @@ export default {
   outline: 5px solid white;
 }
 img{
-  /* justify-content: flex-end; */
   width: 25vw;
-  // height: 70vh;
   margin-left: 7vw;
-  // margin-right: 3%;
 }
 </style>

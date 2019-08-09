@@ -51,6 +51,9 @@ export default {
   components: {
     KeyboardController,
   },
+  props: {
+    focused: Boolean,
+  },
   data() {
     return {
       i: -1,
@@ -64,58 +67,50 @@ export default {
       currentLetter: 1,
       letters: [
         { id: 1, text: 'a', textArray: ['a'] },
-        { id: 2, text: 'g', textArray: ['g'] },
-        { id: 3, text: 'm', textArray: ['m'] },
-        { id: 4, text: 's', textArray: ['s'] },
-        { id: 5, text: 'y', textArray: ['y'] },
-        { id: 6, text: '4', textArray: ['4'] },
-        { id: 7, text: 'Clear', textArray: ['', '', ''] },
-        // { id: 4, text: 'Clear', textArray: ['', '', ''], src: '/static/image/icon_RWx2.png' },
+        { id: 2, text: 'b', textArray: ['b'] },
+        { id: 3, text: 'c', textArray: ['c'] },
+        { id: 4, text: 'd', textArray: ['d'] },
+        { id: 5, text: 'e', textArray: ['e'] },
+        { id: 6, text: 'f', textArray: ['f'] },
 
-        { id: 8, text: 'b', textArray: ['b'] },
-        { id: 9, text: 'h', textArray: ['h'] },
-        { id: 10, text: 'n', textArray: ['n'] },
-        { id: 11, text: 't', textArray: ['t'] },
-        { id: 12, text: 'z', textArray: ['z'] },
-        { id: 13, text: '5', textArray: ['5'] },
-        { id: 14, text: '_', textArray: ['', '', ''], src: '/static/image/icon_RWx2.png' },
+        { id: 7, text: 'g', textArray: ['g'] },
+        { id: 8, text: 'h', textArray: ['h'] },
+        { id: 9, text: 'i', textArray: ['i'] },
+        { id: 10, text: 'j', textArray: ['j'] },
+        { id: 11, text: 'k', textArray: ['k'] },
+        { id: 12, text: 'l', textArray: ['l'] },
 
-        { id: 15, text: 'c', textArray: ['c'] },
-        { id: 16, text: 'i', textArray: ['i'] },
-        { id: 17, text: 'o', textArray: ['o'] },
-        { id: 18, text: 'u', textArray: ['u'] },
-        { id: 19, text: '0', textArray: ['0'] },
-        { id: 20, text: '6', textArray: ['6'] },
-        { id: 21, text: 'Space', textArray: [' '] },
-        // { id: 8, text: 'Space', textArray: [' ', ' ', ' '], src: '/static/image/icon_playVideo.png' },
+        { id: 13, text: 'm', textArray: ['m'] },
+        { id: 14, text: 'n', textArray: ['n'] },
+        { id: 15, text: 'o', textArray: ['o'] },
+        { id: 16, text: 'p', textArray: ['p'] },
+        { id: 17, text: 'q', textArray: ['q'] },
+        { id: 18, text: 'r', textArray: ['r'] },
 
-        { id: 22, text: 'd', textArray: ['d'] },
-        { id: 23, text: 'j', textArray: ['j'] },
-        { id: 24, text: 'p', textArray: ['p'] },
-        { id: 25, text: 'v', textArray: ['v'] },
-        { id: 26, text: '1', textArray: ['1'] },
-        { id: 27, text: '7', textArray: ['7'] },
-        { id: 28, text: '_', textArray: [' '] },
-        // { id: 8, text: 'Space', textArray: [' ', ' ', ' '], src: '/static/image/icon_playVideo.png' },
+        { id: 19, text: 's', textArray: ['s'] },
+        { id: 20, text: 't', textArray: ['t'] },
+        { id: 21, text: 'u', textArray: ['u'] },
+        { id: 22, text: 'v', textArray: ['v'] },
+        { id: 23, text: 'w', textArray: ['w'] },
+        { id: 24, text: 'x', textArray: ['x'] },
 
-        { id: 29, text: 'e', textArray: ['e'] },
-        { id: 30, text: 'k', textArray: ['k'] },
-        { id: 31, text: 'q', textArray: ['q'] },
-        { id: 32, text: 'w', textArray: ['w'] },
-        { id: 33, text: '2', textArray: ['2'] },
-        { id: 34, text: '8', textArray: ['8'] },
-        { id: 35, text: 'Delete', textArray: [' '] },
-        // { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_replay.png' },
+        { id: 25, text: 'y', textArray: ['y'] },
+        { id: 26, text: 'z', textArray: ['z'] },
+        { id: 27, text: '0', textArray: ['0'] },
+        { id: 28, text: '1', textArray: ['1'] },
+        { id: 29, text: '2', textArray: ['2'] },
+        { id: 30, text: '3', textArray: ['3'] },
 
-        { id: 36, text: 'f', textArray: ['f'] },
-        { id: 37, text: 'l', textArray: ['l'] },
-        { id: 38, text: 'r', textArray: ['r'] },
-        { id: 39, text: 'x', textArray: ['x'] },
-        { id: 40, text: '3', textArray: ['3'] },
-        { id: 41, text: '9', textArray: ['9'] },
-        { id: 42, text: '_', textArray: [' '] },
-        // { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_replay.png' },
+        { id: 31, text: '4', textArray: ['4'] },
+        { id: 32, text: '5', textArray: ['5'] },
+        { id: 33, text: '6', textArray: ['6'] },
+        { id: 34, text: '7', textArray: ['7'] },
+        { id: 35, text: '8', textArray: ['8'] },
+        { id: 36, text: '9', textArray: ['9'] },
 
+        { id: 37, text: 'Clear', textArray: [''], src: '/static/image/icon_RWx2.png' },
+        { id: 38, text: 'Space', textArray: [' '] },
+        { id: 39, text: 'Delete', textArray: [' '] },
       ],
       // keyboardFunctions: [
       //   { id: 1, text: 'Clear', textArray: [''] },
@@ -172,26 +167,28 @@ export default {
           break;
         case 38:
           // up
-          if (this.currentLetter % 7 !== 1) {
-            this.currentLetter--;
+          if (this.currentLetter !== 1 && this.currentLetter !== 2 && this.currentLetter !== 3) {
+            this.currentLetter -= 6;
+          } else if (this.currentLetter !== 4 && this.currentLetter !== 5 && this.currentLetter !== 6) {
+            this.currentLetter -= 6;
           }
           break;
         case 40:
           // down
-          if (this.currentLetter % 7 !== 0) {
-            this.currentLetter++;
+          if (this.currentLetter !== 37 && this.currentLetter !== 38 && this.currentLetter !== 39) {
+            this.currentLetter += 6;
           }
           break;
         case 39:
           // right
-          if (this.currentLetter < 36) {
-            this.currentLetter += 7;
+          if (this.currentLetter < 39) {
+            this.currentLetter += 1;
           }
           break;
         case 37:
           // left
-          if (this.currentLetter > 7) {
-            this.currentLetter -= 7;
+          if (this.currentLetter % 6 !== 1) {
+            this.currentLetter -= 1;
           } else {
             this.$emit('left');
           }
@@ -220,7 +217,7 @@ input{
   // opacity: 50%;
   border-radius: 5px;
   color: white;
-  font-size: 200%;
+  font-size: 2vw;
   padding: 2% 0% 2% 4%;
   box-shadow: inset 2px 2px 0px 0px black;
   box-sizing: border-box;
@@ -237,22 +234,28 @@ input{
   }
 
 #J9Keyboard{
+  width: 65%;
   padding-top: 3px;
-  font-size: 200%;
+  font-size: 2vw;
   display: block;
   justify-content: space-between;
 }
 
 #letters{
-  width: 65%;
+  width: 100%;
+  // width: 65%;
   // height: 70%;
   background-color: rgba(255, 255, 255, 0.2);
   color: #efefef;
   border-radius: 10px;
-  column-count: 6;
+  // column-count: 6;
   column-gap: 0px;
   font-weight: bold;
   margin-top: 2vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
   // display: flex;
   // overflow: hidden;
 }
@@ -260,7 +263,7 @@ input{
 #keyboardClrSpcDel{
   justify-content: space-around;
   display: flex;
-  width: 65%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
   color: #efefef;
   border-radius: 10px;
@@ -272,13 +275,10 @@ input{
 }
 
 #listLetter{
-  padding: 19% 0% 19% 0%;
+  padding: 5% 0% 5% 0%;
+  width: 16.66%;
   justify-content: space-between !important;
-  // border-radius: 5px;
-  // outline: 3px solid #E5E5E5;
   outline: rgba(255, 255, 255, 1);
-  // border: 0.5px solid black;
-  // border: 5px solid black;
   box-sizing: border-box;
   border: 0.5px solid black;
 }

@@ -1,9 +1,17 @@
 <template>
 
-  <div id="search">
+  <div class="search">
     <keep-alive>
       <component class="vkb" ref='J9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/> 
     </keep-alive>
+
+    <div class="suggestion">
+      <div>Spider Man</div><br>
+      <div>Keanu Reeves</div><br>
+      <div>The Last of Us</div><br>
+      <div>Tom Hanks</div><br>
+      <div>Your email</div><br>
+    </div>
   </div>
 
 </template>
@@ -51,11 +59,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #search {
+  .search {
     width: 100%;
     height: 100%;
+    display: flex;
     .vkb{
       width: 50vw;
     }
+
+  }
+  .suggestion{
+    color: #efefef;
+    font-size: 2vw;
+    text-align: left;
+    width: 30vw;
+    max-height: 50vh;
+    padding-top: 2vh;
+    padding-left: 3vw;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 </style>

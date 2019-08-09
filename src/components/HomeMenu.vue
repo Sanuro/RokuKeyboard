@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     keyDownHandler(keyCode) {
-      // console.log(this.focused, 'homemenu');
       switch (keyCode) {
         case 38:
           // up
@@ -60,32 +59,15 @@ export default {
           break;
         case 39:
           // right
-          // if (this.focused === true) {
-            // this.focused++;
-          console.log('this.focused', this.focused);
-          // this.$store.commit('focusChange', 'grid');
           this.$emit('right');
-          this.$emit('searchRight');
-          console.log(this.focused);
-          // this.focused = false;
-            // console.log('focus changed', this.$store.commit('focusChange', 'grid'));
-          // }
+          // this.$emit('searchRight');
           break;
         case 37:
           // left
-          // if (this.focused === false) {
-            // this.$emit('left');
-            // this.$store.commit('focusChange', 'menu');
-            // this.$emit('left');
-            // this.focused = true;
-          // }
           break;
         case 13:
-          // if (this.currentItem === 6) {
-            // this.focused = false;
           this.$emit('search');
           console.log('showing search');
-          // }
           break;
         default: break;
       }

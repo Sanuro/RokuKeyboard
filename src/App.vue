@@ -5,7 +5,7 @@
         <HomeMenu id='homeMenu' ref='menu' :focused="focusTarget==='menu'" @right="focusTarget='main'" @change="onMenuChange">homeMenu</HomeMenu>
         <div id="main-view"> 
           <template v-if="currentMenu === 'search'">
-            <Search :focused="focusTarget==='main'" @back="focusTarget==='ad'" @left="focusTarget='menu'" ref="main" @searchRight="focusTarget='J9KeyboardRef'"/>
+            <Search :focused="focusTarget==='main'" @back="focusTarget==='ad'" @left="focusTarget='menu'" ref="main"/>
           </template>
           <template v-else>
             <div id='appMenuBox'>

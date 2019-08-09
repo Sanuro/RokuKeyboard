@@ -8,14 +8,12 @@
   <div id='T9Keyboard'>
 
     <div id='letters' @keydown='T9'> 
-      <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": focused && currentLetter === letter.id}'>
+      <ul id='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter":  currentLetter === letter.id}'>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 0 && currentLetter === letter.id}'>{{letter.text[0]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 1 && currentLetter === letter.id}'>{{letter.text[2]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
 
-          <span v-if='letter.id % 4 === 0'>{{letter.text}}</span>
-        
-          <!-- {{letter.text}}<br> -->
+          <span v-if='letter.id % 4 === 0'>{{letter.text}}</span><br>
           <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'>
           <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
@@ -35,7 +33,7 @@ export default {
     KeyboardController,
   },
   props: {
-    focused: Boolean,
+    // focused: Boolean,
   },
   data() {
     return {
@@ -45,7 +43,7 @@ export default {
       img: Image,
       timer: 0,
       pause: 0,
-      difTolerance: 350,
+      difTolerance: 400,
       startTime: 0,
       endTime: 0,
       currentLetter: 1,
@@ -155,26 +153,20 @@ export default {
 #container{
   display: flex;
   flex-direction: column;
-  // align-self: left;
   margin-left: 4.85vw;
 }
 
 input{
   width: 65%;
   background-color: rgba(255, 255, 255, 0.4);
-  // opacity: 50%;
   border-radius: 5px;
   color: white;
-  font-size: 200%;
+  font-size: 2vw;
   padding: 2% 0% 2% 6.5%;
   box-shadow: inset 2px 2px 0px 0px black;
   box-sizing: border-box;
   border-radius: 5px;
   text-transform: lowercase;
-  // font-family: GothamBookLat;
-  // placeholder{
-  //   color: white;
-  // }
 }
   ::placeholder{
     color: white;
@@ -182,8 +174,7 @@ input{
   }
 
 #T9Keyboard{
-  padding-top: 3px;
-  font-size: 200%;
+  font-size: 2vw;
   display: flex;
   justify-content: space-between;
 }
@@ -198,17 +189,12 @@ input{
   column-gap: 0px;
   font-weight: bold;
   margin-top: 2vh;
-  // overflow: hidden;
 }
 
 #listLetter{
-  padding: 30% 0% 30% 0%;
+  padding: 30% 5% 30% 5%;
   justify-content: space-between !important;
-  // border-radius: 5px;
-  // outline: 3px solid #E5E5E5;
   outline: rgba(255, 255, 255, 1);
-  // border: 0.5px solid black;
-  // border: 5px solid black;
   box-sizing: border-box;
   border: 0.5px solid black;
 }
@@ -216,33 +202,29 @@ input{
 #legendImg{
   height: 1.5vh;
   opacity: 0.8;
-  // margin-top: 5px !important; 
-  // width: 1.5vw;
-  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
-  // background-color: rgba(255, 255, 255, 1);
 }
 
 .active-letter {
   align-content: space-between;
   background-color:#efefef;
   color: black;
-  // border-radius: 10px;
-  // box-sizing: border-box;
-  // border: 0.5px solid black;
-  // border: 1px solid black;
-  // border-radius: 5px;
+  // transform: scale(0.90);
   transition: 0.3s;
-  // box-shadow: 0 0 5px black;
-  // transform: scale(1.1);
-  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
   #legendImg{
     filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
   }
 }
 
 .make-bold {
-  font-weight: bolder;
-  text-decoration: underline;
+  position: relative;
+  // font-size: 3vw;
+  // font-weight: bolder;
+  // text-decoration: underline;
+  background-color: black;
+  color: #efefef;
+  // padding: 2px;
+  // transition: 0.4s;
+  margin: 0% !important;
+  border-radius: 5px;
 }
-
 </style>
