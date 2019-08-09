@@ -1,4 +1,5 @@
 <template>
+<<<<<<< Updated upstream
 <div id='abc-container'>
   <input type='text' v-model='placeholderJ9' id='input-abc' placeholder= 'movie, tv, actor'>
   <div id='abc-keyboard'>
@@ -6,6 +7,24 @@
       <div class='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
           <div class='alphaNumButton' v-if="letter.text">{{letter.text}}</div>
           <img v-if='letter.src' class='legendImg' v-bind:src='letter.src'>
+=======
+<div id='container'>
+
+  <!-- <div id='inputJ99'> -->
+    <input type='text' v-model='placeholderJ9' id='inputJ9' placeholder= 'movie, tv, actor'>
+  <!-- </div> -->
+
+  <div id='J9Keyboard'>
+
+    <div id='letters'> 
+      <div class='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": focused && currentLetter === letter.id}'>
+          <div id='alphaNumButton' v-if="letter.id < 37">{{letter.text}}</div>
+          <div id='bottomButton' v-if="letter.id >= 37">{{letter.text}}</div>
+          <img v-if='letter.id === 37' id='legendImg' v-bind:src='letter.src'>
+          <img v-if='letter.id === 38' id='legendImg' v-bind:src='letter.src'>
+          <img v-if='letter.id === 39' id='legendImg' v-bind:src='letter.src'>
+          <!-- <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'> -->
+>>>>>>> Stashed changes
       </div>
     </div>
   </div>
