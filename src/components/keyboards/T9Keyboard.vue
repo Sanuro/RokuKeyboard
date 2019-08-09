@@ -14,7 +14,10 @@
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
 
           <span v-if='letter.id % 4 === 0'>{{letter.text}}</span><br>
-          <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'>
+          <!-- <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'> -->
+          <img v-if='letter.id == 4' id='legendImg' v-bind:src='letter.src'>
+            <img v-if='letter.id == 8' id='legendImg' v-bind:src='letter.src'>
+          <img v-if='letter.id == 12' id='legendImgRewind' v-bind:src='letter.src'>
           <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
     </div>
@@ -47,6 +50,7 @@ export default {
       startTime: 0,
       endTime: 0,
       currentLetter: 1,
+      pressedEnterAfterMoving: false,
       letters: [
         { id: 1, text: 'a b c', textArray: ['a', 'b', 'c'] },
         { id: 2, text: 'j k l', textArray: ['j', 'k', 'l'] },
@@ -59,7 +63,7 @@ export default {
         { id: 9, text: 'g h i', textArray: ['g', 'h', 'i'] },
         { id: 10, text: 'p q r', textArray: ['p', 'q', 'r'] },
         { id: 11, text: 'y z .', textArray: ['y', 'z', '.'] },
-        { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_replay.png' },
+        { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_restart.png' },
       ],
     };
   },
@@ -97,10 +101,11 @@ export default {
           break;
         case 13:
           // enter
-          if (this.stillPressingEnter) {
+          if (this.stillPressingEnter && this.pressedEnterAfterMoving) {
             // delete the last character
             this.placeholderT9 = this.placeholderT9.slice(0, -1);
           }
+          this.pressedEnterAfterMoving = true;
           this.stillPressingEnter = true;
           this.i = (this.i + 1) % 3;
           this.placeholderT9 += (this.letters[this.currentLetter - 1].textArray[this.i]);
@@ -116,23 +121,31 @@ export default {
           break;
         case 38:
           // up
+          this.pressedEnterAfterMoving = false;
+          this.i = -1;
           if (this.currentLetter !== 1 && this.currentLetter !== 5 && this.currentLetter !== 9) {
             this.currentLetter--;
           }
           break;
         case 40:
           // down
+          this.pressedEnterAfterMoving = false;
+          this.i = -1;
           if (this.currentLetter !== 4 && this.currentLetter !== 8 && this.currentLetter !== 12) {
             this.currentLetter++;
           }
           break;
         case 39:
           // right
+          this.pressedEnterAfterMoving = false;
+          this.i = -1;
           if (this.currentLetter < 9) {
             this.currentLetter += 4;
           }
           break;
         case 37:
+          this.i = -1;
+          this.pressedEnterAfterMoving = false;
           // left
           if (this.currentLetter > 4) {
             this.currentLetter -= 4;
@@ -200,7 +213,12 @@ input{
 }
 
 #legendImg{
-  height: 1.5vh;
+  // width: 2vw;
+  height: 2vh;
+  opacity: 0.8;
+}
+#legendImgRewind{
+  height: 3vh;
   opacity: 0.8;
 }
 

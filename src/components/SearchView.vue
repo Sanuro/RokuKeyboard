@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       isActive: false,
-      keyboardMode: 'T9',
+      keyboardMode: 'ABC',
     };
   },
   methods: {
