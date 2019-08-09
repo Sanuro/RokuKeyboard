@@ -205,7 +205,7 @@ export default {
 }
 
 input{
-  width: 61%;
+  width: 60.65%;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
   color: white;
@@ -222,7 +222,7 @@ input{
   }
 
 #J9Keyboard{
-  width: 61%;
+  width: 60.65%;
   padding-top: 3px;
   font-size: 2vw;
   display: block;
@@ -272,7 +272,7 @@ input{
 
 #bottomButton {
     // margin-left: 5px;
-    width: 10.08vw !important;
+    width: 10.05vw !important;
     align-self: center;
   }
 

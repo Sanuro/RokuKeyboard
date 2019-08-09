@@ -6,11 +6,11 @@
     </keep-alive>
 
     <div class="suggestion">
-      <div>Spider Man</div><br>
-      <div>Keanu Reeves</div><br>
-      <div>The Last of Us</div><br>
-      <div>Tom Hanks</div><br>
-      <div>Your email</div><br>
+      <div id='spiderMan'><img src='/static/image/icon_movie.png'> Spider Man</div>
+      <div id='searchResult'><img src='/static/image/icon_celebrity.png'> Keanu Reeves</div>
+      <div id='searchResult'><img src='/static/image/icon_movie.png'> The Last of Us</div>
+      <div id='searchResult'><img src='/static/image/icon_celebrity.png'> Tom Hanks</div>
+      <div id='searchResult'><img src='/static/image/icon_info.png'> Your email</div>
     </div>
   </div>
 
@@ -66,7 +66,6 @@ export default {
     .vkb{
       width: 50vw;
     }
-
   }
   .suggestion{
     color: #efefef;
@@ -74,8 +73,20 @@ export default {
     text-align: left;
     width: 30vw;
     max-height: 50vh;
-    padding-top: 2vh;
-    padding-left: 3vw;
-    background-color: rgba(255, 255, 255, 0.5);
+    // padding-top: 2vh;
+    // padding-left: 3vw;
+    // background-color: rgba(255, 255, 255, 0.5);
+
+  }
+  #spiderMan{
+    background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.329));
+    // box-shadow: 3px 3px 4px black;
+    padding: 2.5% 0% 2.5% 4%;
+    border: 1px solid black;
+    border-radius: 5px;
+    // align-: center;
+  }
+  #searchResult{
+    padding: 4%;
   }
 </style>
