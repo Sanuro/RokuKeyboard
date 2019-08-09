@@ -160,8 +160,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 4.85vw;
-  width: 24vw;
-  margin-right: 17vw;
+  width: 100%;
 }
 
 input#inputT9{

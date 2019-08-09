@@ -65,7 +65,8 @@ export default {
     height: 100%;
     display: flex;
     .vkb{
-      width: 50vw;
+      width: 24vw !important;
+      margin-right: 17vw;
     }
   }
   .suggestion{

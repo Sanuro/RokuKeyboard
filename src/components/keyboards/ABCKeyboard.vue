@@ -190,8 +190,7 @@ export default {
   // align-self: left;
 
   margin-left: 4.85vw;
-  width: 24vw;
-  margin-right: 17vw;
+  width: 100%;
 }
 
 input#input-abc{
