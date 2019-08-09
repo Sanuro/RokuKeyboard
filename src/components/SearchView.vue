@@ -17,7 +17,6 @@
   </div>
 
 </template>
-
 <script>
 import J9 from './keyboards/J9Keyboard';
 import T9 from './keyboards/T9Keyboard';

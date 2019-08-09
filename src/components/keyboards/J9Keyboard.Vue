@@ -216,7 +216,6 @@ input#inputJ9{
   }
 }
 
-
 .active-letter {
   align-content: space-between;
   background-color:#efefef;
@@ -224,19 +223,14 @@ input#inputJ9{
 
   transition: 0.3s;
   #legendImg{
-    filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
+    filter: invert(100%);
   }
 }
 
 .make-bold {
   position: relative;
-  // font-size: 3vw;
-  // font-weight: bolder;
-  // text-decoration: underline;
   background-color: black;
   color: #efefef;
-  // padding: 2px;
-  // transition: 0.4s;
   margin: 0% !important;
   // box-sizing: border-box;
   // border: 10px solid black;

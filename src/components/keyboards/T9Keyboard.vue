@@ -234,11 +234,12 @@ input#inputT9{
   color: black;
   // transform: scale(0.90);
   transition: 0.3s;
-  #legendImg{
+  .legendImg{
     filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
   }
-}
 
+}
+  
 .make-bold {
   position: relative;
   // font-size: 3vw;
@@ -250,5 +251,6 @@ input#inputT9{
   // transition: 0.4s;
   margin: 0% !important;
   border-radius: 5px;
+  // filter: invert(1) brightness(50%) sepia(100%) saturate(10000%);
 }
 </style>
