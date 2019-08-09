@@ -7,9 +7,11 @@
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 0 && currentLetter === letter.id}'>{{letter.text[0]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i === 1 && currentLetter === letter.id}'>{{letter.text[2]}}</span>
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
-          <span v-if='letter.id % 4 === 0'>{{letter.text}}</span><br>
-          <img v-if='letter.src' class='legendImg' :class="{rewind: letter.id === 12}" v-bind:src='letter.src'>
-          <img v-if='letter.id == 8' class='legendImg' src='/static/image/icon_pauseVideo.png'>
+          <span v-if='letter.id % 4 === 0'>{{letter.text}}</span>
+          <div v-if='letter.src' class='legendImg' :class="{rewind: letter.id === 12}">
+            <img v-bind:src='letter.src'>
+            <img v-if='letter.id == 8' src='/static/image/icon_pauseVideo.png'>
+          </div>
       </ul>
     </div>
   </div> 
@@ -161,11 +163,12 @@ input#inputJ9{
   box-sizing: border-box;
   border-radius: 5px;
   text-transform: lowercase;
-}
-  ::placeholder{
+
+  &::placeholder{
     color: white;
     opacity: 0.6;
   }
+}
 
 #J9Keyboard{
   font-size: 2vw;
@@ -182,25 +185,38 @@ input#inputJ9{
   column-gap: 0px;
   font-weight: bold;
   margin-top: 2vh;
+  overflow: hidden;
 }
 
 .listLetter{
-  padding: 30% 5% 30% 5%;
-  text-align: center;
+  // padding: 30% 5% 30% 5%;
+  width: 8vw;
+  height: 7.5vw;
+  line-height: 7.5vw;
   // justify-content: space-between !important;
   outline: rgba(255, 255, 255, 1);
   box-sizing: border-box;
   border: 0.5px solid black;
-}
 
-.legendImg{
-  height: 1.5vh;
-  opacity: 0.8;
+  &:last-child, &:nth-last-child(5), &:nth-last-child(9) {
+    line-height: 5.2vw;
+  }
 
-  &.rewind{
-    height: 3vh;
+  .legendImg{
+    margin-top: -.8vh;
+    line-height: 0;
+    height: 1.5vh;
+    opacity: 0.8;
+    &.rewind{
+      margin-top: -1.8vh;
+      height: 3vh;
+    }
+    img{
+      height: 100%;
+    }
   }
 }
+
 
 .active-letter {
   align-content: space-between;

@@ -205,11 +205,12 @@ input#input-abc{
   box-sizing: border-box;
   border-radius: 5px;
   text-transform: lowercase;
-}
-  ::placeholder{
+
+  &::placeholder{
     color: white;
     opacity: 0.6;
   }
+}
 
 #abc-keyboard{
   width: 100%;
@@ -230,6 +231,7 @@ input#input-abc{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  overflow: hidden;
 }
 
 #keyboardClrSpcDel{
@@ -245,8 +247,8 @@ input#input-abc{
 }
 
 .listLetter{
-  height: 5vw;
-  line-height: 5vw;
+  height: 4.2vw;
+  line-height: 4.2vw;
   width: 4vw;
   outline: rgba(255, 255, 255, 1);
   box-sizing: border-box;
