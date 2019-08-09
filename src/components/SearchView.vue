@@ -6,7 +6,7 @@
       :focused="focused" ref='J9KeyboardRef' :is="keyboardMode" @left="$emit('left')"/> 
     </keep-alive>
 
-    <div class="suggestion">
+    <div class="suggestion" v-if="focused">
       <div class="title">Last Searched Keyword</div>
       <div id='spiderMan' class='searchResult'><img src='/static/image/icon_movie.png'> Spider Man</div>
       <div class='searchResult'><img src='/static/image/icon_celebrity.png'> Keanu Reeves</div>
@@ -85,7 +85,6 @@ export default {
     // padding-top: 2vh;
     // padding-left: 3vw;
     // background-color: rgba(255, 255, 255, 0.5);
-<<<<<<< Updated upstream
 
     .title{
       margin-bottom: 0.3em;
@@ -93,8 +92,6 @@ export default {
       opacity: .8;
       font-size: .9em;
     }
-=======
->>>>>>> Stashed changes
   }
   .searchResult{
     width: 39vw;
