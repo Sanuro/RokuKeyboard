@@ -14,11 +14,8 @@
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
 
           <span v-if='letter.id % 4 === 0'>{{letter.text}}</span><br>
-          <!-- <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'> -->
-          <img v-if='letter.id == 4' id='legendImg' v-bind:src='letter.src'>
-            <img v-if='letter.id == 8' id='legendImg' v-bind:src='letter.src'>
-          <img v-if='letter.id == 12' id='legendImgRewind' v-bind:src='letter.src'>
-          <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
+          <img v-if='letter.src' class='legendImg' :class="{rewind: letter.id === 12}" v-bind:src='letter.src'>
+          <img v-if='letter.id == 8' class='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
     </div>
 
@@ -63,7 +60,7 @@ export default {
         { id: 9, text: 'g h i', textArray: ['g', 'h', 'i'] },
         { id: 10, text: 'p q r', textArray: ['p', 'q', 'r'] },
         { id: 11, text: 'y z .', textArray: ['y', 'z', '.'] },
-        { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_restart.png' },
+        { id: 12, text: 'Delete', textArray: ['', '', ''], src: '/static/image/icon_replay.png' },
       ],
     };
   },
@@ -167,10 +164,12 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 4.85vw;
+  width: 24vw;
+  margin-right: 17vw;
 }
 
 input{
-  width: 65%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
   color: white;
@@ -193,7 +192,7 @@ input{
 }
 
 #letters{
-  width: 65%;
+  width: 100%;
   // height: 60%;
   background-color: rgba(255, 255, 255, 0.2);
   color: #efefef;
@@ -205,21 +204,20 @@ input{
 }
 
 #listLetter{
-  padding: 30% 5% 30% 5%;
-  justify-content: space-between !important;
+  padding: 30% 5%;
+  text-align: center;
+  // justify-content: space-between !important;
   outline: rgba(255, 255, 255, 1);
   box-sizing: border-box;
   border: 0.5px solid black;
 }
 
-#legendImg{
-  // width: 2vw;
-  height: 2vh;
+.legendImg{
+  height: 1.5vh;
   opacity: 0.8;
-}
-#legendImgRewind{
-  height: 3vh;
-  opacity: 0.8;
+  &.rewind{
+    height: 3vh;
+  }
 }
 
 .active-letter {

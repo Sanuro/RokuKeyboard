@@ -6,11 +6,12 @@
     </keep-alive>
 
     <div class="suggestion">
-      <div id='spiderMan'><img src='/static/image/icon_movie.png'> Spider Man</div>
-      <div id='searchResult'><img src='/static/image/icon_celebrity.png'> Keanu Reeves</div>
-      <div id='searchResult'><img src='/static/image/icon_movie.png'> The Last of Us</div>
-      <div id='searchResult'><img src='/static/image/icon_celebrity.png'> Tom Hanks</div>
-      <div id='searchResult'><img src='/static/image/icon_info.png'> Your email</div>
+      <div class="title">Last Searched Keyword</div>
+      <div id='spiderMan' class='searchResult'><img src='/static/image/icon_movie.png'> Spider Man</div>
+      <div class='searchResult'><img src='/static/image/icon_celebrity.png'> Keanu Reeves</div>
+      <div class='searchResult'><img src='/static/image/icon_movie.png'> The Last of Us</div>
+      <div class='searchResult'><img src='/static/image/icon_celebrity.png'> Tom Hanks</div>
+      <div class='searchResult'><img src='/static/image/icon_info.png'> Your email</div>
     </div>
   </div>
 
@@ -68,8 +69,9 @@ export default {
     }
   }
   .suggestion{
+    position: relative;
     color: #efefef;
-    font-size: 2vw;
+    font-size: 1.7vw;
     text-align: left;
     width: 30vw;
     max-height: 50vh;
@@ -77,16 +79,29 @@ export default {
     // padding-left: 3vw;
     // background-color: rgba(255, 255, 255, 0.5);
 
+    .title{
+      margin-bottom: 0.3em;
+      bottom: 100%;
+      opacity: .8;
+      font-size: .9em;
+    }
   }
-  #spiderMan{
-    background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.329));
-    // box-shadow: 3px 3px 4px black;
-    padding: 2.5% 0% 2.5% 4%;
-    border: 1px solid black;
-    border-radius: 5px;
-    // align-: center;
-  }
-  #searchResult{
-    padding: 4%;
+  .searchResult{
+    width: 39vw;
+    padding: 0 .8em;
+    margin: .9em 0;
+    img{
+      vertical-align: bottom;
+      margin-right: 0.6em;
+    }
+    &#spiderMan{
+      background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), rgba(255, 255, 255, 0.329));
+      padding: .5em .8em;
+      margin: 0;
+      margin-bottom: -.5em;
+      border: 1px solid black;
+      border-radius: 5px;
+      // align-: center;
+    }
   }
 </style>

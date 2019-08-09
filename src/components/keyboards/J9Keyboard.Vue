@@ -14,8 +14,8 @@
           <span v-if='letter.id % 4 !== 0' :class='{"make-bold": i == 2 && currentLetter === letter.id}'>{{letter.text[4]}}</span>
 
           <span v-if='letter.id % 4 === 0'>{{letter.text}}</span><br>
-          <img v-if='letter.id % 4 == 0' id='legendImg' v-bind:src='letter.src'>
-          <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'>
+          <img v-if='letter.src' class='legendImg' :class="{rewind: letter.id === 12}" v-bind:src='letter.src'>
+          <img v-if='letter.id == 8' class='legendImg' src='/static/image/icon_pauseVideo.png'>
       </ul>
     </div>
 
@@ -154,10 +154,12 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 4.85vw;
+  width: 24vw;
+  margin-right: 17vw;
 }
 
 input{
-  width: 65%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
   color: white;
@@ -180,8 +182,7 @@ input{
 }
 
 #letters{
-  width: 65%;
-  // height: 60%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.2);
   color: #efefef;
   border-radius: 10px;
@@ -193,15 +194,20 @@ input{
 
 #listLetter{
   padding: 30% 5% 30% 5%;
-  justify-content: space-between !important;
+  text-align: center;
+  // justify-content: space-between !important;
   outline: rgba(255, 255, 255, 1);
   box-sizing: border-box;
   border: 0.5px solid black;
 }
 
-#legendImg{
+.legendImg{
   height: 1.5vh;
   opacity: 0.8;
+
+  &.rewind{
+    height: 3vh;
+  }
 }
 
 .active-letter {

@@ -11,9 +11,7 @@
       <div class='listLetter' v-for='letter in letters' :key='letter.id' :class='{"active-letter": currentLetter === letter.id}'>
           <div id='alphaNumButton' v-if="letter.id < 37">{{letter.text}}</div>
           <div id='bottomButton' v-if="letter.id >= 37">{{letter.text}}</div>
-          <img v-if='letter.id === 37' id='legendImg' v-bind:src='letter.src'>
-          <img v-if='letter.id === 38' id='legendImg' v-bind:src='letter.src'>
-          <img v-if='letter.id === 39' id='legendImg' v-bind:src='letter.src'>
+          <img v-if='letter.src' id='legendImg' v-bind:src='letter.src'>
           <!-- <img v-if='letter.id == 8' id='legendImg' src='/static/image/icon_pauseVideo.png'> -->
       </div>
     </div>
@@ -200,12 +198,14 @@ export default {
   display: flex;
   flex-direction: column;
   // align-self: left;
+
   margin-left: 4.85vw;
-  // width: 100%;
+  width: 24vw;
+  margin-right: 17vw;
 }
 
 input{
-  width: 60.65%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 5px;
   color: white;
@@ -222,7 +222,7 @@ input{
   }
 
 #J9Keyboard{
-  width: 60.65%;
+  width: 100%;
   padding-top: 3px;
   font-size: 2vw;
   display: block;
@@ -255,26 +255,20 @@ input{
 }
 
 .listLetter{
-  padding: 5% 0% 5% 0%;
-  // width: 16.66%;
-  justify-content: space-between;
+  height: 5vw;
+  line-height: 5vw;
+  width: 4vw;
   outline: rgba(255, 255, 255, 1);
   box-sizing: border-box;
   border: 0.5px solid black;
-  align-content: space-around;
-  
-}
-
-
-#alphaNumButton {
-  width: 5vw !important;
-}
-
-#bottomButton {
-    // margin-left: 5px;
-    width: 10.05vw !important;
-    align-self: center;
+  img{
+    margin-top: -.2em;
+    vertical-align: middle;
   }
+  &:last-child, &:nth-last-child(2), &:nth-last-child(3){
+    width: 8vw;
+  }
+}
 
 #legendImg{
   width: 2.5vw;
