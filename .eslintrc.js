@@ -11,7 +11,7 @@ module.exports = {
     'import/resolver': {
       'webpack': {
         'config': './build//webpack.base.conf.js'
-      }
+      },
     }
   },
   // allow browser globals
